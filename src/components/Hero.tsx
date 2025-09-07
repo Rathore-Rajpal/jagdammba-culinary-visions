@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ChefHat, Phone } from "lucide-react";
+import { Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroThali from "@/assets/hero-thali.jpg";
 

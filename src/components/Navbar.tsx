@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, ChefHat } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 export const Navbar = () => {
   const location = useLocation();
@@ -36,7 +36,11 @@ export const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo - Smaller on mobile */}
           <Link to="/" className="flex items-center">
-            <ChefHat className="w-7 h-7 md:w-8 md:h-8 text-primary mr-2 md:mr-3" />
+            <img 
+              src="/logo.png" 
+              alt="Jagdammba Caterers Logo" 
+              className="w-8 h-8 md:w-10 md:h-10 mr-2 md:mr-3" 
+            />
             <span className="text-lg md:text-xl font-bold text-gradient-gold">Jagdammba</span>
           </Link>
 

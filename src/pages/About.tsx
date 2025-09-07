@@ -121,13 +121,20 @@ const AboutPage = () => {
           </p>
           
           <div className="glass-card p-8 max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold text-gradient-gold mb-4">Halwaai Uday Singh Bhati</h3>
-            <p className="text-lg text-muted-foreground mb-6">Head Chef & Founder</p>
-            <p className="text-muted-foreground leading-relaxed">
-              With over 25 years of culinary expertise, Uday Singh Bhati leads our team with passion and precision. 
-              His deep understanding of traditional recipes combined with modern presentation techniques ensures 
-              every dish meets our high standards of taste and quality.
-            </p>
+            <div className="flex flex-col items-center">
+              <img 
+                src="/logo.png" 
+                alt="Jagdammba Caterers Logo" 
+                className="w-24 h-24 mb-6" 
+              />
+              <h3 className="text-2xl font-bold text-gradient-gold mb-4">Halwaai Uday Singh Bhati</h3>
+              <p className="text-lg text-muted-foreground mb-6">Head Chef & Founder</p>
+              <p className="text-muted-foreground leading-relaxed">
+                With over 25 years of culinary expertise, Uday Singh Bhati leads our team with passion and precision. 
+                His deep understanding of traditional recipes combined with modern presentation techniques ensures 
+                every dish meets our high standards of taste and quality.
+              </p>
+            </div>
           </div>
         </div>
       </section>

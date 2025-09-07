@@ -1,4 +1,4 @@
-import { ChefHat, Phone, Mail, MapPin, Clock, MessageCircle } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export const Footer = () => {
@@ -24,7 +24,11 @@ export const Footer = () => {
           {/* Brand Section */}
           <div className="space-y-4">
             <div className="flex items-center">
-              <ChefHat className="w-8 h-8 text-primary mr-3" />
+              <img 
+                src="/logo.png" 
+                alt="Jagdammba Caterers Logo" 
+                className="w-10 h-10 mr-3" 
+              />
               <span className="text-2xl font-bold text-gradient-gold">Jagdammba</span>
             </div>
             <p className="text-sm md:text-base text-muted-foreground">
@@ -103,7 +107,7 @@ export const Footer = () => {
           <div className="flex items-center space-x-4 mt-4 md:mt-0">
             <Link to="/privacy-policy" className="text-xs md:text-sm text-muted-foreground hover:text-primary transition-colors">Privacy Policy</Link>
             <span className="text-muted-foreground">|</span>
-            <Link to="/privacy-policy" className="text-xs md:text-sm text-muted-foreground hover:text-primary transition-colors">Terms of Service</Link>
+            <Link to="/terms-and-conditions" className="text-xs md:text-sm text-muted-foreground hover:text-primary transition-colors">Terms & Conditions</Link>
           </div>
         </div>
       </div>
