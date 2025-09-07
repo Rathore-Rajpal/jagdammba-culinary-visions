@@ -211,6 +211,16 @@
 }
 
 @layer utilities {
+  /* Hide scrollbar for horizontal scroll containers */
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* Internet Explorer and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+  
   /* Custom animations */
   .animate-fade-in-up {
     animation: fadeInUp 0.8s ease-out forwards;

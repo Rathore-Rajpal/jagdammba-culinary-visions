@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Phone, Mail, MapPin, Clock, MessageCircle, Send, User, Calendar } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, MessageCircle, Send, User, Calendar, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { useToast } from "@/components/ui/use-toast";
+import { Toaster } from "@/components/ui/toaster";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +16,10 @@ const ContactPage = () => {
     guestCount: "",
     message: ""
   });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const { toast } = useToast();
 
   const contactInfo = [
     {
@@ -60,29 +66,118 @@ const ContactPage = () => {
   ];
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    // Clear error when field is edited
+    if (errors[e.target.name]) {
+      setErrors({
+        ...errors,
+        [e.target.name]: ""
+      });
+    }
+    
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData);
-    // You would typically send this to your backend or email service
-    alert("Thank you for your inquiry! We'll get back to you soon.");
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
     
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      eventType: "",
-      eventDate: "",
-      guestCount: "",
-      message: ""
-    });
+    // Validate name
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required";
+    }
+    
+    // Validate email
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
+    
+    // Validate phone
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Phone number is required";
+    } else if (!/^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/.test(formData.phone.replace(/\s+/g, ''))) {
+      newErrors.phone = "Please enter a valid phone number";
+    }
+    
+    // Validate event type
+    if (!formData.eventType) {
+      newErrors.eventType = "Please select an event type";
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Validate form
+    if (!validateForm()) {
+      toast({
+        title: "Form Error",
+        description: "Please fill all required fields correctly.",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    setIsSubmitting(true);
+    
+    try {
+      // Simulating API call
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // In a real application, you would send the data to a backend API
+      // For example:
+      // const response = await fetch('/api/booking', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify(formData),
+      // });
+      // const data = await response.json();
+      
+      console.log("Form submitted:", formData);
+      
+      // Show success message
+      toast({
+        title: "Booking Request Submitted!",
+        description: "Thank you for your inquiry. We'll get back to you within 24 hours.",
+        variant: "default"
+      });
+      
+      setIsSuccess(true);
+      
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        eventType: "",
+        eventDate: "",
+        guestCount: "",
+        message: ""
+      });
+      
+      // Reset success state after a delay
+      setTimeout(() => {
+        setIsSuccess(false);
+      }, 5000);
+      
+    } catch (error) {
+      toast({
+        title: "Submission Failed",
+        description: "There was an error submitting your request. Please try again.",
+        variant: "destructive"
+      });
+      console.error("Error submitting form:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -132,9 +227,26 @@ const ContactPage = () => {
                     ))}
                   </div>
 
-                  <Button className="btn-hero-primary w-full golden-glow">
-                    {info.action}
-                  </Button>
+                  {info.title === "Phone Numbers" ? (
+                    <a href={`tel:${info.details[0].replace(/\s/g, '')}`} className="btn-hero-primary w-full golden-glow flex items-center justify-center">
+                      <Phone className="w-5 h-5 mr-2" />
+                      {info.action}
+                    </a>
+                  ) : info.title === "Email" ? (
+                    <a href={`mailto:${info.details[0]}`} className="btn-hero-primary w-full golden-glow flex items-center justify-center">
+                      <Mail className="w-5 h-5 mr-2" />
+                      {info.action}
+                    </a>
+                  ) : info.title.includes("Address") ? (
+                    <a href={`https://maps.google.com/?q=${encodeURIComponent(info.details.join(', '))}`} target="_blank" rel="noopener noreferrer" className="btn-hero-primary w-full golden-glow flex items-center justify-center">
+                      <MapPin className="w-5 h-5 mr-2" />
+                      {info.action}
+                    </a>
+                  ) : (
+                    <Button className="btn-hero-primary w-full golden-glow">
+                      {info.action}
+                    </Button>
+                  )}
                 </div>
               ))}
             </div>
@@ -177,6 +289,13 @@ const ContactPage = () => {
 
               <div className="glass-card p-8">
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {isSuccess && (
+                    <div className="bg-green-900/20 border border-green-500/30 text-green-400 px-4 py-3 rounded-lg flex items-center mb-6">
+                      <CheckCircle className="w-5 h-5 mr-2" />
+                      <span>Your booking request has been sent successfully! We'll contact you soon.</span>
+                    </div>
+                  )}
+                  
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-medium mb-2">
@@ -186,12 +305,16 @@ const ContactPage = () => {
                       <input
                         type="text"
                         name="name"
-                        required
                         value={formData.name}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 bg-muted/20 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                        className={`w-full px-4 py-3 bg-muted/20 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary ${
+                          errors.name ? 'border-red-500' : 'border-border'
+                        }`}
                         placeholder="Your full name"
                       />
+                      {errors.name && (
+                        <p className="text-red-500 text-xs mt-1">{errors.name}</p>
+                      )}
                     </div>
 
                     <div>
@@ -202,12 +325,16 @@ const ContactPage = () => {
                       <input
                         type="email"
                         name="email"
-                        required
                         value={formData.email}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 bg-muted/20 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                        className={`w-full px-4 py-3 bg-muted/20 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary ${
+                          errors.email ? 'border-red-500' : 'border-border'
+                        }`}
                         placeholder="your.email@example.com"
                       />
+                      {errors.email && (
+                        <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+                      )}
                     </div>
 
                     <div>
@@ -218,12 +345,16 @@ const ContactPage = () => {
                       <input
                         type="tel"
                         name="phone"
-                        required
                         value={formData.phone}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 bg-muted/20 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                        className={`w-full px-4 py-3 bg-muted/20 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary ${
+                          errors.phone ? 'border-red-500' : 'border-border'
+                        }`}
                         placeholder="+91 98765 43210"
                       />
+                      {errors.phone && (
+                        <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
+                      )}
                     </div>
 
                     <div>
@@ -233,16 +364,20 @@ const ContactPage = () => {
                       </label>
                       <select
                         name="eventType"
-                        required
                         value={formData.eventType}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 bg-muted/20 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                        className={`w-full px-4 py-3 bg-muted/20 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary ${
+                          errors.eventType ? 'border-red-500' : 'border-border'
+                        }`}
                       >
                         <option value="">Select event type</option>
                         {eventTypes.map((type) => (
                           <option key={type} value={type}>{type}</option>
                         ))}
                       </select>
+                      {errors.eventType && (
+                        <p className="text-red-500 text-xs mt-1">{errors.eventType}</p>
+                      )}
                     </div>
 
                     <div>
@@ -291,10 +426,26 @@ const ContactPage = () => {
                   </div>
 
                   <div className="text-center">
-                    <Button type="submit" className="btn-hero-primary golden-glow px-12">
-                      <Send className="w-5 h-5 mr-2" />
-                      Send Message
+                    <Button 
+                      type="submit" 
+                      className="btn-hero-primary golden-glow px-12"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                          Processing...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-5 h-5 mr-2" />
+                          Send Booking Request
+                        </>
+                      )}
                     </Button>
+                    <p className="text-sm text-muted-foreground mt-4">
+                      We typically respond to inquiries within 24 hours.
+                    </p>
                   </div>
                 </form>
               </div>
@@ -311,14 +462,14 @@ const ContactPage = () => {
                 For urgent inquiries or last-minute bookings, contact us directly via phone or WhatsApp.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button className="btn-hero-primary golden-glow">
-                  <Phone className="w-5 h-5 mr-2" />
+                <a href="tel:+919928649209" className="btn-hero-primary golden-glow flex items-center justify-center">
+                  <Phone className="w-5 h-5 mr-2 animate-pulse" />
                   Call Now: +91 99286 49209
-                </Button>
-                <Button className="btn-hero-secondary">
+                </a>
+                <a href="https://wa.me/919928649209" target="_blank" rel="noopener noreferrer" className="btn-hero-secondary flex items-center justify-center">
                   <MessageCircle className="w-5 h-5 mr-2" />
                   WhatsApp Chat
-                </Button>
+                </a>
               </div>
             </div>
           </div>
@@ -340,14 +491,21 @@ const ContactPage = () => {
               <p className="text-lg text-muted-foreground mb-6">
                 1/1, D.D.P. Nagar, Madhuban Housing Board, Basni, Jodhpur
               </p>
-              <Button className="btn-hero-primary golden-glow">
+              <a 
+                href="https://maps.google.com/?q=1/1, D.D.P. Nagar, Madhuban Housing Board, Basni, Jodhpur" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="btn-hero-primary golden-glow inline-flex items-center justify-center"
+              >
                 <MapPin className="w-5 h-5 mr-2" />
                 Get Directions
-              </Button>
+              </a>
             </div>
           </div>
         </section>
       </div>
+      <Footer />
+      <Toaster />
     </>
   );
 };

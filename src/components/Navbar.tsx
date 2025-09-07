@@ -32,12 +32,12 @@ export const Navbar = () => {
         ? 'bg-background/95 backdrop-blur-md shadow-[var(--shadow-card)]' 
         : 'bg-transparent'
     }`}>
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
+          {/* Logo - Smaller on mobile */}
           <Link to="/" className="flex items-center">
-            <ChefHat className="w-8 h-8 text-primary mr-3" />
-            <span className="text-xl font-bold text-gradient-gold">Jagdammba</span>
+            <ChefHat className="w-7 h-7 md:w-8 md:h-8 text-primary mr-2 md:mr-3" />
+            <span className="text-lg md:text-xl font-bold text-gradient-gold">Jagdammba</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -58,8 +58,8 @@ export const Navbar = () => {
             ))}
           </div>
 
-          {/* CTA Button */}
-          <Link to="/contact">
+          {/* CTA Button - Hidden on mobile */}
+          <Link to="/contact" className="hidden md:block">
             <Button className="btn-hero-primary">
               Book Now
             </Button>
@@ -76,20 +76,20 @@ export const Navbar = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden glass-card mt-2 p-4 rounded-lg">
+          <div className="md:hidden glass-card mt-2 p-4 rounded-lg shadow-[var(--shadow-card)]">
             <div className="flex flex-col space-y-4">
               {navItems.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
-                  className="text-foreground hover:text-primary transition-colors"
+                  className="text-foreground hover:text-primary transition-colors py-2"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.name}
                 </Link>
               ))}
-              <Link to="/contact">
-                <Button className="btn-hero-primary w-full">
+              <Link to="/contact" className="mt-2">
+                <Button className="btn-hero-primary w-full py-3">
                   Book Now
                 </Button>
               </Link>

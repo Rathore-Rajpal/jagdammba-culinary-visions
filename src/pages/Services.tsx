@@ -1,6 +1,7 @@
 import { Crown, Users, Calendar, Utensils, Heart, Award, Star, Clock } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { Link } from "react-router-dom";
 
 const ServicesPage = () => {
   const services = [
@@ -229,12 +230,12 @@ const ServicesPage = () => {
               व्यक्तिगत परामर्श के लिए आज ही हमसे संपर्क करें और हमें अपने विशेष अवसर के लिए एक अविस्मरणीय पाक अनुभव बनाने दें।
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="btn-hero-primary golden-glow">
+              <Link to="/contact" className="btn-hero-primary golden-glow inline-flex items-center justify-center">
                 Get Free Quote <span className="font-hindi text-sm ml-1">(निःशुल्क कोटेशन प्राप्त करें)</span>
-              </button>
-              <button className="btn-hero-secondary">
+              </Link>
+              <Link to="/menu" className="btn-hero-secondary inline-flex items-center justify-center">
                 View Sample Menus <span className="font-hindi text-sm ml-1">(नमूना मेनू देखें)</span>
-              </button>
+              </Link>
             </div>
           </div>
         </section>

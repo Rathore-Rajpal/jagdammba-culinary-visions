@@ -1,5 +1,4 @@
 import { Crown, Building, Heart } from "lucide-react";
-import { Link } from "react-router-dom";
 
 export const WhyChooseUs = () => {
   const features = [
@@ -86,9 +85,9 @@ export const WhyChooseUs = () => {
             <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6">
               Let us handle the culinary experience while you enjoy every moment of your special celebration.
             </p>
-            <Link to="/contact" className="btn-hero-primary golden-glow w-full sm:w-auto inline-flex items-center justify-center">
+            <button className="btn-hero-primary golden-glow w-full sm:w-auto">
               Start Planning Your Event
-            </Link>
+            </button>
           </div>
         </div>
       </div>
