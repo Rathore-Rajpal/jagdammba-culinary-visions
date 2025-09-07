@@ -2,6 +2,7 @@ import { Crown, Users, Calendar, Utensils, Heart, Award, Star, Clock } from "luc
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Link } from "react-router-dom";
+import { openWhatsAppChat } from "@/lib/utils";
 
 const ServicesPage = () => {
   const services = [
@@ -175,8 +176,14 @@ const ServicesPage = () => {
                     ))}
                   </div>
 
-                  <button className="btn-hero-primary w-full golden-glow text-sm md:text-base py-2 md:py-3">
-                    Learn More
+                  <button 
+                    onClick={() => openWhatsAppChat(
+                      service.title,
+                      `Hello! I would like to inquire about your ${service.title} services. Could you please provide more information about pricing and availability for my upcoming event?`
+                    )}
+                    className="btn-hero-primary w-full golden-glow text-sm md:text-base py-2 md:py-3"
+                  >
+                    Inquire Now
                   </button>
                 </div>
               ))}
@@ -212,6 +219,15 @@ const ServicesPage = () => {
                   <p className="font-hindi text-base md:text-md mb-2">{service.hindiTitle}</p>
                   <p className="text-xs md:text-sm text-muted-foreground">{service.description}</p>
                   <p className="font-hindi text-[10px] md:text-xs text-muted-foreground mt-2">{service.hindiDescription}</p>
+                  <button 
+                    onClick={() => openWhatsAppChat(
+                      service.title,
+                      `Hello! I would like to know more details about your "${service.title}" service. Could you please provide additional information?`
+                    )}
+                    className="btn-hero-secondary w-full text-xs md:text-sm mt-4 py-1.5 md:py-2"
+                  >
+                    Get Details
+                  </button>
                 </div>
               ))}
             </div>

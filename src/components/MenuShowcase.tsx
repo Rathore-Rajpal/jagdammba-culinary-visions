@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { openWhatsAppChat } from "@/lib/utils";
+import { Link } from "react-router-dom";
 import sweetsCollection from "@/assets/sweets-collection.jpg";
 import curryDishes from "@/assets/curry-dishes.jpg";
 
@@ -99,15 +100,13 @@ export const MenuShowcase = () => {
         </div>
 
         <div className="text-center mt-8 md:mt-12">
-          <Button 
-            className="btn-hero-primary golden-glow w-full sm:w-auto"
-            onClick={() => openWhatsAppChat(
-              "Complete Menu", 
-              "Hello! I am interested in seeing your complete menu with detailed pricing information. Could you please share the full menu with me?"
-            )}
-          >
-            View Complete Menu
-          </Button>
+          <Link to="/menu">
+            <Button 
+              className="btn-hero-primary golden-glow w-full sm:w-auto"
+            >
+              View Complete Menu
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
