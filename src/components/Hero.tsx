@@ -35,10 +35,10 @@ export const Hero = () => {
             </div>
             
             <h1 className="text-5xl lg:text-7xl font-bold mb-6 leading-tight">
-              <span className="text-gradient-gold">Delicious Memories,</span>
+              <span className="text-gradient-gold">जगदम्बा कैटरर्स</span>
               <br />
               <span className="inline-block mt-2 text-3xl text-gradient-gold font-bold" style={{ lineHeight: 1.2 }}>
-                जगदम्बा कैटरर्स
+                 Delicious Memories 
               </span>
             </h1>
             
