@@ -8,6 +8,12 @@ import sweetsCollection from "@/assets/sweets-collection.jpg";
 import curryDishes from "@/assets/curry-dishes.jpg";
 import heroThali from "@/assets/hero-thali.jpg";
 import chefCooking from "@/assets/chef-cooking.jpg";
+// Additional category-specific images
+import riceImage from "@/assets/rice.png";
+import rotiImage from "@/assets/roti.png";
+import saladImage from "@/assets/Salad.png";
+import snacksImage from "@/assets/salty snaks.png";
+import stallItemsImage from "@/assets/stall items.png";
 
 const MenuPage = () => {
   const [activeCategory, setActiveCategory] = useState("all");
@@ -23,15 +29,15 @@ const MenuPage = () => {
       case "breakfast":
         return chefCooking;
       case "snacks":
-        return curryDishes; // Updated to use curry dishes for snacks
+        return snacksImage; // Using specific snacks image
       case "stall":
-        return heroThali;
+        return stallItemsImage; // Using specific stall items image
       case "salad":
-        return heroThali; // Updated to use hero thali for salad
+        return saladImage; // Using specific salad image
       case "roti":
-        return sweetsCollection; // Updated to use sweets collection for roti
+        return rotiImage; // Using specific roti image
       case "rice":
-        return chefCooking; // Updated to use chef cooking for rice
+        return riceImage; // Using specific rice image
       default:
         return sweetsCollection;
     }
@@ -148,20 +154,20 @@ const MenuPage = () => {
     { name: "Vegetable Raita", category: "vegetables", description: "Mixed vegetable yogurt", image: curryDishes },
 
     // Salty Snacks Category
-    { name: "Mewa Moyer", category: "snacks", description: "Dry fruit based snack", image: curryDishes },
-    { name: "Mewa Madhur", category: "snacks", description: "Sweet and savory dry fruit mix", image: curryDishes },
-    { name: "Dal Moth", category: "snacks", description: "Lentil-based snack", image: curryDishes },
-    { name: "Mix Namkeen", category: "snacks", description: "Assorted savory mix", image: curryDishes },
-    { name: "Ratalami Sev", category: "snacks", description: "Ratlam-style sev", image: curryDishes },
-    { name: "Navratna Mixer", category: "snacks", description: "Nine-ingredient snack mix", image: curryDishes },
-    { name: "Bhavnagari Gathia", category: "snacks", description: "Bhavnagar-style gathia", image: curryDishes },
-    { name: "Aalu Papdi", category: "snacks", description: "Potato wafers", image: curryDishes },
-    { name: "Barik Sev", category: "snacks", description: "Fine gram flour noodles", image: curryDishes },
-    { name: "Lahrun Gathia", category: "snacks", description: "Garlic flavored gathia", image: curryDishes },
-    { name: "Jhakas Papad", category: "snacks", description: "Special spiced papadum", image: curryDishes },
-    { name: "Kotari Papad", category: "snacks", description: "Traditional papadum variety", image: curryDishes },
-    { name: "Khichia", category: "snacks", description: "Rice flour crackers", image: curryDishes },
-    { name: "Salewada Phali", category: "snacks", description: "Salted beans snack", image: curryDishes },
+    { name: "Mewa Moyer", category: "snacks", description: "Dry fruit based snack", image: snacksImage },
+    { name: "Mewa Madhur", category: "snacks", description: "Sweet and savory dry fruit mix", image: snacksImage },
+    { name: "Dal Moth", category: "snacks", description: "Lentil-based snack", image: snacksImage },
+    { name: "Mix Namkeen", category: "snacks", description: "Assorted savory mix", image: snacksImage },
+    { name: "Ratalami Sev", category: "snacks", description: "Ratlam-style sev", image: snacksImage },
+    { name: "Navratna Mixer", category: "snacks", description: "Nine-ingredient snack mix", image: snacksImage },
+    { name: "Bhavnagari Gathia", category: "snacks", description: "Bhavnagar-style gathia", image: snacksImage },
+    { name: "Aalu Papdi", category: "snacks", description: "Potato wafers", image: snacksImage },
+    { name: "Barik Sev", category: "snacks", description: "Fine gram flour noodles", image: snacksImage },
+    { name: "Lahrun Gathia", category: "snacks", description: "Garlic flavored gathia", image: snacksImage },
+    { name: "Jhakas Papad", category: "snacks", description: "Special spiced papadum", image: snacksImage },
+    { name: "Kotari Papad", category: "snacks", description: "Traditional papadum variety", image: snacksImage },
+    { name: "Khichia", category: "snacks", description: "Rice flour crackers", image: snacksImage },
+    { name: "Salewada Phali", category: "snacks", description: "Salted beans snack", image: snacksImage },
 
     // Breakfast Category
     { name: "Jalebi Imarti", category: "breakfast", description: "Sweet spiral treats", image: curryDishes },
@@ -184,64 +190,64 @@ const MenuPage = () => {
     { name: "Chai/Coffee", category: "breakfast", description: "Indian tea/Coffee", image: curryDishes },
 
     // Stall Items Category
-    { name: "Tandoori Roti", category: "stall", description: "Clay oven baked flatbread", image: curryDishes },
-    { name: "Roti", category: "stall", description: "Traditional flatbread", image: curryDishes },
-    { name: "Khai Sans", category: "stall", description: "Special savory snack", image: curryDishes },
-    { name: "Chowmein", category: "stall", description: "Stir-fried noodles", image: curryDishes },
-    { name: "Pani Patasa", category: "stall", description: "Pani puri/Golgappa", image: curryDishes },
-    { name: "Fruit Chaat", category: "stall", description: "Spiced fruit salad", image: curryDishes },
-    { name: "Manchurian", category: "stall", description: "Indo-Chinese vegetable balls", image: curryDishes },
-    { name: "Pav Bhaji", category: "stall", description: "Spiced vegetable mash with bread", image: curryDishes },
-    { name: "Tawa Sabji", category: "stall", description: "Griddle-cooked vegetables", image: curryDishes },
-    { name: "Paneer Tikka", category: "stall", description: "Grilled spiced cottage cheese", image: curryDishes },
-    { name: "Kesar Doodh", category: "stall", description: "Saffron milk", image: curryDishes },
-    { name: "Coffee", category: "stall", description: "Brewed coffee", image: curryDishes },
-    { name: "Ice Cream", category: "stall", description: "Frozen dessert", image: curryDishes },
-    { name: "Aloo Tikki", category: "stall", description: "Potato patties", image: curryDishes },
-    { name: "Soup", category: "stall", description: "Vegetable soup", image: curryDishes },
-    { name: "Juicer", category: "stall", description: "Fresh fruit juices", image: curryDishes },
-    { name: "Idli Sambhar", category: "stall", description: "Steamed rice cakes with lentil stew", image: curryDishes },
-    { name: "Paneer Chilli", category: "stall", description: "Spicy cottage cheese", image: curryDishes },
-    { name: "Rumali Roti", category: "stall", description: "Thin handkerchief bread", image: curryDishes },
-    { name: "Butter Naan", category: "stall", description: "Buttered leavened bread", image: curryDishes },
-    { name: "Kadhai Doodh", category: "stall", description: "Milk cooked in iron wok", image: curryDishes },
-    { name: "Chole Bhature", category: "stall", description: "Spiced chickpeas with fried bread", image: curryDishes },
-    { name: "Delhi Chaat", category: "stall", description: "Savory snack with various textures", image: curryDishes },
-    { name: "Spring Roll", category: "stall", description: "Crispy vegetable rolls", image: curryDishes },
-    { name: "Palak Bada", category: "stall", description: "Spinach fritters", image: curryDishes },
-    { name: "Dal Fry", category: "stall", description: "Fried lentils", image: curryDishes },
-    { name: "Pineapple Shake", category: "stall", description: "Pineapple milkshake", image: curryDishes },
-    { name: "American Makka", category: "stall", description: "American style corn", image: curryDishes },
-    { name: "Chuski Machine", category: "stall", description: "Ice gola/shaved ice", image: curryDishes },
-    { name: "Popcorn Machine", category: "stall", description: "Fresh popcorn", image: curryDishes },
-    { name: "Gudiya Bal", category: "stall", description: "Cotton candy", image: curryDishes },
+    { name: "Tandoori Roti", category: "stall", description: "Clay oven baked flatbread", image: stallItemsImage },
+    { name: "Roti", category: "stall", description: "Traditional flatbread", image: stallItemsImage },
+    { name: "Khai Sans", category: "stall", description: "Special savory snack", image: stallItemsImage },
+    { name: "Chowmein", category: "stall", description: "Stir-fried noodles", image: stallItemsImage },
+    { name: "Pani Patasa", category: "stall", description: "Pani puri/Golgappa", image: stallItemsImage },
+    { name: "Fruit Chaat", category: "stall", description: "Spiced fruit salad", image: stallItemsImage },
+    { name: "Manchurian", category: "stall", description: "Indo-Chinese vegetable balls", image: stallItemsImage },
+    { name: "Pav Bhaji", category: "stall", description: "Spiced vegetable mash with bread", image: stallItemsImage },
+    { name: "Tawa Sabji", category: "stall", description: "Griddle-cooked vegetables", image: stallItemsImage },
+    { name: "Paneer Tikka", category: "stall", description: "Grilled spiced cottage cheese", image: stallItemsImage },
+    { name: "Kesar Doodh", category: "stall", description: "Saffron milk", image: stallItemsImage },
+    { name: "Coffee", category: "stall", description: "Brewed coffee", image: stallItemsImage },
+    { name: "Ice Cream", category: "stall", description: "Frozen dessert", image: stallItemsImage },
+    { name: "Aloo Tikki", category: "stall", description: "Potato patties", image: stallItemsImage },
+    { name: "Soup", category: "stall", description: "Vegetable soup", image: stallItemsImage },
+    { name: "Juicer", category: "stall", description: "Fresh fruit juices", image: stallItemsImage },
+    { name: "Idli Sambhar", category: "stall", description: "Steamed rice cakes with lentil stew", image: stallItemsImage },
+    { name: "Paneer Chilli", category: "stall", description: "Spicy cottage cheese", image: stallItemsImage },
+    { name: "Rumali Roti", category: "stall", description: "Thin handkerchief bread", image: stallItemsImage },
+    { name: "Butter Naan", category: "stall", description: "Buttered leavened bread", image: stallItemsImage },
+    { name: "Kadhai Doodh", category: "stall", description: "Milk cooked in iron wok", image: stallItemsImage },
+    { name: "Chole Bhature", category: "stall", description: "Spiced chickpeas with fried bread", image: stallItemsImage },
+    { name: "Delhi Chaat", category: "stall", description: "Savory snack with various textures", image: stallItemsImage },
+    { name: "Spring Roll", category: "stall", description: "Crispy vegetable rolls", image: stallItemsImage },
+    { name: "Palak Bada", category: "stall", description: "Spinach fritters", image: stallItemsImage },
+    { name: "Dal Fry", category: "stall", description: "Fried lentils", image: stallItemsImage },
+    { name: "Pineapple Shake", category: "stall", description: "Pineapple milkshake", image: stallItemsImage },
+    { name: "American Makka", category: "stall", description: "American style corn", image: stallItemsImage },
+    { name: "Chuski Machine", category: "stall", description: "Ice gola/shaved ice", image: stallItemsImage },
+    { name: "Popcorn Machine", category: "stall", description: "Fresh popcorn", image: stallItemsImage },
+    { name: "Gudiya Bal", category: "stall", description: "Cotton candy", image: stallItemsImage },
 
     // Salad Category
-    { name: "Moth Fry", category: "salad", description: "Fried moth beans", image: heroThali },
-    { name: "Chana Fry", category: "salad", description: "Fried chickpeas", image: heroThali },
-    { name: "Ankurit Salad", category: "salad", description: "Sprouted bean salad", image: heroThali },
-    { name: "Kheera", category: "salad", description: "Cucumber", image: heroThali },
-    { name: "Tamatar", category: "salad", description: "Tomatoes", image: heroThali },
-    { name: "Pyaz", category: "salad", description: "Onions", image: heroThali },
-    { name: "Kakdi", category: "salad", description: "Cucumber variety", image: heroThali },
-    { name: "Mooli", category: "salad", description: "Radish", image: heroThali },
-    { name: "Gajar", category: "salad", description: "Carrots", image: heroThali },
+    { name: "Moth Fry", category: "salad", description: "Fried moth beans", image: saladImage },
+    { name: "Chana Fry", category: "salad", description: "Fried chickpeas", image: saladImage },
+    { name: "Ankurit Salad", category: "salad", description: "Sprouted bean salad", image: saladImage },
+    { name: "Kheera", category: "salad", description: "Cucumber", image: saladImage },
+    { name: "Tamatar", category: "salad", description: "Tomatoes", image: saladImage },
+    { name: "Pyaz", category: "salad", description: "Onions", image: saladImage },
+    { name: "Kakdi", category: "salad", description: "Cucumber variety", image: saladImage },
+    { name: "Mooli", category: "salad", description: "Radish", image: saladImage },
+    { name: "Gajar", category: "salad", description: "Carrots", image: saladImage },
 
     // Roti Category
-    { name: "Plain Roti", category: "roti", description: "Simple flatbread", image: sweetsCollection },
-    { name: "Tawa Roti", category: "roti", description: "Griddle-cooked flatbread", image: sweetsCollection },
-    { name: "Puri", category: "roti", description: "Deep-fried puffed bread", image: sweetsCollection },
-    { name: "Methi Puri", category: "roti", description: "Fenugreek flavored puri", image: sweetsCollection },
-    { name: "Rumali Roti", category: "roti", description: "Thin handkerchief bread", image: sweetsCollection },
-    { name: "Butter Naan", category: "roti", description: "Buttered leavened bread", image: sweetsCollection },
+    { name: "Plain Roti", category: "roti", description: "Simple flatbread", image: rotiImage },
+    { name: "Tawa Roti", category: "roti", description: "Griddle-cooked flatbread", image: rotiImage },
+    { name: "Puri", category: "roti", description: "Deep-fried puffed bread", image: rotiImage },
+    { name: "Methi Puri", category: "roti", description: "Fenugreek flavored puri", image: rotiImage },
+    { name: "Rumali Roti", category: "roti", description: "Thin handkerchief bread", image: rotiImage },
+    { name: "Butter Naan", category: "roti", description: "Buttered leavened bread", image: rotiImage },
 
     // Rice Category
-    { name: "Khichdi", category: "rice", description: "Rice and lentil porridge", image: chefCooking },
-    { name: "Kabuli", category: "rice", description: "Rice with chickpeas", image: chefCooking },
-    { name: "Matar Pulao", category: "rice", description: "Peas pilaf", image: chefCooking },
-    { name: "Jeera Rice", category: "rice", description: "Cumin flavored rice", image: chefCooking },
-    { name: "Sada Chawal", category: "rice", description: "Plain steamed rice", image: chefCooking },
-    { name: "Ram Khichdi", category: "rice", description: "Special khichdi variety", image: chefCooking }
+    { name: "Khichdi", category: "rice", description: "Rice and lentil porridge", image: riceImage },
+    { name: "Kabuli", category: "rice", description: "Rice with chickpeas", image: riceImage },
+    { name: "Matar Pulao", category: "rice", description: "Peas pilaf", image: riceImage },
+    { name: "Jeera Rice", category: "rice", description: "Cumin flavored rice", image: riceImage },
+    { name: "Sada Chawal", category: "rice", description: "Plain steamed rice", image: riceImage },
+    { name: "Ram Khichdi", category: "rice", description: "Special khichdi variety", image: riceImage }
   ];
 
   const filteredItems = menuItems.filter(item => {
