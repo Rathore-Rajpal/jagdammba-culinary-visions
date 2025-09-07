@@ -261,13 +261,13 @@ const MenuPage = () => {
       <Navbar />
       <div className="min-h-screen bg-background pt-20">
       {/* Hero Section */}
-      <section className="py-20 bg-hero">
-        <div className="container mx-auto px-6 text-center">
-          <h1 className="text-5xl lg:text-6xl font-bold mb-6">
+      <section className="py-12 md:py-20 bg-hero">
+        <div className="container mx-auto px-4 sm:px-6 text-center">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
             Our <span className="text-gradient-gold">Complete Menu</span>
           </h1>
-          <p className="font-hindi text-3xl mb-4">जगदम्बा का विशेष मेनू</p>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="font-hindi text-xl sm:text-2xl md:text-3xl mb-3 sm:mb-4">जगदम्बा का विशेष मेनू</p>
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
             Explore our authentic collection of traditional dishes, featuring sweets, royal vegetables, 
             breakfast items, snacks and more - all carefully prepared with premium ingredients.
           </p>
@@ -275,60 +275,62 @@ const MenuPage = () => {
       </section>
 
       {/* Menu Content */}
-      <section className="py-20">
-        <div className="container mx-auto px-6">
+      <section className="py-12 md:py-20">
+        <div className="container mx-auto px-4 sm:px-6">
           {/* Search and Filter */}
-          <div className="flex flex-col md:flex-row gap-4 mb-12">
+          <div className="flex flex-col md:flex-row gap-3 md:gap-4 mb-8 md:mb-12">
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4 md:w-5 md:h-5" />
               <input
                 type="text"
                 placeholder="Search dishes..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-muted/20 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full pl-9 md:pl-10 pr-3 md:pr-4 py-2 md:py-3 text-sm md:text-base bg-muted/20 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
-            <Button variant="outline" className="btn-hero-secondary">
-              <Filter className="w-5 h-5 mr-2" />
+            <Button variant="outline" className="btn-hero-secondary py-2 h-auto md:h-[42px]">
+              <Filter className="w-4 h-4 md:w-5 md:h-5 mr-2" />
               Filter
             </Button>
           </div>
 
           {/* Category Tabs */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            {categories.map((category) => (
-              <Button
-                key={category.id}
-                variant={activeCategory === category.id ? "default" : "outline"}
-                onClick={() => setActiveCategory(category.id)}
-                className={`${
-                  activeCategory === category.id 
-                    ? "btn-hero-primary" 
-                    : "btn-hero-secondary"
-                } px-6 py-3`}
-              >
-                <span className="mr-2 text-lg">{category.emoji}</span>
-                <div className="flex flex-col">
-                  <span>{category.name}</span>
-                  <span className="text-xs font-hindi">{category.hindiName}</span>
-                </div>
-              </Button>
-            ))}
+          <div className="overflow-x-auto pb-4 mb-8 md:mb-12 scrollbar-hide">
+            <div className="flex space-x-2 md:space-x-3 md:flex-wrap md:justify-center min-w-max md:min-w-0 px-1">
+              {categories.map((category) => (
+                <Button
+                  key={category.id}
+                  variant={activeCategory === category.id ? "default" : "outline"}
+                  onClick={() => setActiveCategory(category.id)}
+                  className={`${
+                    activeCategory === category.id 
+                      ? "btn-hero-primary" 
+                      : "btn-hero-secondary"
+                  } px-3 md:px-5 py-2 md:py-3 text-sm md:text-base whitespace-nowrap md:mb-3`}
+                >
+                  <span className="mr-1 md:mr-2 text-base md:text-lg">{category.emoji}</span>
+                  <div className="flex flex-col">
+                    <span>{category.name}</span>
+                    <span className="text-[10px] md:text-xs font-hindi">{category.hindiName}</span>
+                  </div>
+                </Button>
+              ))}
+            </div>
           </div>
 
           {/* Price Notice */}
-          <div className="text-center mb-10">
-            <div className="inline-block px-6 py-3 border border-primary/20 rounded-lg bg-primary/5 text-center">
-              <p className="text-muted-foreground text-lg">
+          <div className="text-center mb-8 md:mb-10">
+            <div className="inline-block px-4 md:px-6 py-3 border border-primary/20 rounded-lg bg-primary/5 text-center">
+              <p className="text-muted-foreground text-sm md:text-lg">
                 <span className="font-bold text-primary">Note:</span> Prices are available upon request. Please contact us for detailed pricing.
               </p>
-              <p className="font-hindi text-lg mt-1">मूल्य अनुरोध पर उपलब्ध हैं। कृपया विस्तृत जानकारी के लिए हमसे संपर्क करें।</p>
+              <p className="font-hindi text-sm md:text-lg mt-1">मूल्य अनुरोध पर उपलब्ध हैं। कृपया विस्तृत जानकारी के लिए हमसे संपर्क करें।</p>
             </div>
           </div>
 
           {/* Menu Items Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
             {filteredItems.map((item, index) => (
               <div 
                 key={index}
@@ -339,15 +341,16 @@ const MenuPage = () => {
                   <img 
                     src={item.image} 
                     alt={item.name}
-                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-36 sm:h-40 md:h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 </div>
                 
-                <div className="p-6">
-                  <h3 className="text-lg font-semibold text-gradient-gold mb-2">
+                <div className="p-4 md:p-6">
+                  <h3 className="text-base md:text-lg font-semibold text-gradient-gold mb-1 md:mb-2">
                     {item.name}
-                    <span className="text-xs text-muted-foreground block mt-1 font-hindi">
+                    <span className="text-[10px] md:text-xs text-muted-foreground block mt-0.5 md:mt-1 font-hindi">
                       {item.category === "sweets" ? "मिठाई" : 
                        item.category === "vegetables" ? "शाही सब्जियां" :
                        item.category === "breakfast" ? "नाश्ता" :
@@ -358,14 +361,14 @@ const MenuPage = () => {
                        item.category === "rice" ? "चावल" : ""}
                     </span>
                   </h3>
-                  <p className="text-sm text-muted-foreground mb-4">{item.description}</p>
+                  <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4">{item.description}</p>
                   <div className="flex justify-between items-center">
-                    <span className="text-xs uppercase text-primary font-medium">
+                    <span className="text-[10px] md:text-xs uppercase text-primary font-medium">
                       {categories.find(c => c.id === item.category)?.name}
                     </span>
                     <Button 
                       size="sm" 
-                      className="btn-hero-primary"
+                      className="btn-hero-primary text-xs md:text-sm py-1 h-7 md:h-8"
                       onClick={() => openWhatsAppChat(
                         item.name, 
                         `Hello! I am interested in ordering "${item.name}". Could you please provide pricing and availability information?`
@@ -386,15 +389,15 @@ const MenuPage = () => {
           )}
 
           {/* Contact for Custom Orders */}
-          <div className="text-center mt-16">
-            <div className="glass-card p-8 max-w-2xl mx-auto">
-              <h3 className="text-2xl font-bold text-gradient-gold mb-2">Custom Orders Welcome</h3>
-              <p className="font-hindi text-xl mb-2">कस्टम ऑर्डर का स्वागत है</p>
-              <p className="text-muted-foreground mb-6">
+          <div className="text-center mt-10 md:mt-16">
+            <div className="glass-card p-6 md:p-8 max-w-2xl mx-auto">
+              <h3 className="text-xl md:text-2xl font-bold text-gradient-gold mb-2">Custom Orders Welcome</h3>
+              <p className="font-hindi text-lg md:text-xl mb-2">कस्टम ऑर्डर का स्वागत है</p>
+              <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6">
                 Don't see what you're looking for? We can prepare custom dishes according to your preferences and dietary requirements.
               </p>
               <Button 
-                className="btn-hero-primary golden-glow"
+                className="btn-hero-primary golden-glow text-sm md:text-base py-2 px-4"
                 onClick={() => openWhatsAppChat(
                   "Custom Menu", 
                   "Hello! I would like to discuss creating a custom menu for my event. Could you please help me with options and pricing?"

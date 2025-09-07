@@ -115,67 +115,67 @@ const ServicesPage = () => {
       <Navbar />
       <div className="min-h-screen bg-background pt-20">
         {/* Hero Section */}
-        <section className="py-20 bg-hero">
-          <div className="container mx-auto px-6 text-center">
-            <h1 className="text-5xl lg:text-6xl font-bold mb-6">
+        <section className="py-12 md:py-20 bg-hero">
+          <div className="container mx-auto px-4 sm:px-6 text-center">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-6">
               Our <span className="text-gradient-gold">Services</span>
             </h1>
-            <p className="font-hindi text-3xl mb-4">हमारी सेवाएं</p>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="font-hindi text-xl sm:text-2xl md:text-3xl mb-3 sm:mb-4">हमारी सेवाएं</p>
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
               Comprehensive catering solutions for every occasion, combining traditional flavors with professional service excellence.
             </p>
-            <p className="font-hindi text-lg mt-4 text-muted-foreground max-w-3xl mx-auto">
+            <p className="font-hindi text-sm sm:text-base md:text-lg mt-3 sm:mt-4 text-muted-foreground max-w-3xl mx-auto">
               हर अवसर के लिए व्यापक खानपान समाधान, पारंपरिक स्वादों को पेशेवर सेवा उत्कृष्टता के साथ जोड़ते हुए।
             </p>
           </div>
         </section>
 
         {/* Main Services */}
-        <section className="py-20">
-          <div className="container mx-auto px-6">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold mb-6">Complete <span className="text-gradient-gold">Catering Solutions</span></h2>
-              <p className="font-hindi text-2xl mb-4">संपूर्ण खानपान समाधान</p>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+        <section className="py-12 md:py-20">
+          <div className="container mx-auto px-4 sm:px-6">
+            <div className="text-center mb-8 md:mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-6">Complete <span className="text-gradient-gold">Catering Solutions</span></h2>
+              <p className="font-hindi text-lg sm:text-xl md:text-2xl mb-3 sm:mb-4">संपूर्ण खानपान समाधान</p>
+              <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
                 From intimate family gatherings to grand celebrations, we provide full-service catering tailored to your needs.
               </p>
-              <p className="font-hindi text-lg mt-3 text-muted-foreground max-w-2xl mx-auto">
+              <p className="font-hindi text-sm sm:text-base md:text-lg mt-2 sm:mt-3 text-muted-foreground max-w-2xl mx-auto">
                 छोटे पारिवारिक समारोहों से लेकर बड़े उत्सवों तक, हम आपकी आवश्यकताओं के अनुसार पूर्ण-सेवा खानपान प्रदान करते हैं।
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
               {services.map((service, index) => (
                 <div 
                   key={index}
-                  className="glass-card p-8 hover-tilt group animate-fade-in-up"
+                  className="glass-card p-5 md:p-8 hover-tilt group animate-fade-in-up"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
-                  <div className="text-center mb-6">
-                    <div className="text-4xl mb-4">{service.image}</div>
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full mb-4 group-hover:scale-110 transition-transform duration-300">
-                      <service.icon className="w-8 h-8 text-primary" />
+                  <div className="text-center mb-4 md:mb-6">
+                    <div className="text-3xl md:text-4xl mb-3 md:mb-4">{service.image}</div>
+                    <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full mb-3 md:mb-4 group-hover:scale-110 transition-transform duration-300">
+                      <service.icon className="w-6 h-6 md:w-8 md:h-8 text-primary" />
                     </div>
-                    <h3 className="text-2xl font-bold text-gradient-gold mb-1">{service.title}</h3>
-                    <p className="font-hindi text-lg mb-2">{service.hindiTitle}</p>
-                    <p className="text-primary font-semibold">{service.price}</p>
-                    <p className="font-hindi text-sm text-primary">{service.hindiPrice}</p>
+                    <h3 className="text-xl md:text-2xl font-bold text-gradient-gold mb-1">{service.title}</h3>
+                    <p className="font-hindi text-base md:text-lg mb-1 md:mb-2">{service.hindiTitle}</p>
+                    <p className="text-primary font-semibold text-sm md:text-base">{service.price}</p>
+                    <p className="font-hindi text-xs md:text-sm text-primary">{service.hindiPrice}</p>
                   </div>
 
-                  <p className="text-muted-foreground mb-3 leading-relaxed">{service.description}</p>
-                  <p className="font-hindi text-sm text-muted-foreground mb-6 leading-relaxed">{service.hindiDescription}</p>
+                  <p className="text-sm md:text-base text-muted-foreground mb-2 md:mb-3 leading-relaxed">{service.description}</p>
+                  <p className="font-hindi text-xs md:text-sm text-muted-foreground mb-4 md:mb-6 leading-relaxed">{service.hindiDescription}</p>
 
-                  <div className="space-y-2 mb-6">
+                  <div className="space-y-2 mb-4 md:mb-6">
                     {service.features.map((feature, featureIndex) => (
-                      <div key={featureIndex} className="flex items-center text-sm">
-                        <div className="w-2 h-2 bg-primary rounded-full mr-3 flex-shrink-0"></div>
+                      <div key={featureIndex} className="flex items-start text-xs md:text-sm">
+                        <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-primary rounded-full mr-2 md:mr-3 flex-shrink-0 mt-1"></div>
                         <span className="text-muted-foreground">{feature}</span>
-                        <span className="text-muted-foreground font-hindi text-xs ml-1">({service.hindiFeatures[featureIndex]})</span>
+                        <span className="text-muted-foreground font-hindi text-[10px] md:text-xs ml-1">({service.hindiFeatures[featureIndex]})</span>
                       </div>
                     ))}
                   </div>
 
-                  <button className="btn-hero-primary w-full golden-glow">
+                  <button className="btn-hero-primary w-full golden-glow text-sm md:text-base py-2 md:py-3">
                     Learn More
                   </button>
                 </div>
@@ -185,33 +185,33 @@ const ServicesPage = () => {
         </section>
 
         {/* Additional Services */}
-        <section className="py-20 bg-muted/30">
-          <div className="container mx-auto px-6">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold mb-4">Additional <span className="text-gradient-gold">Services</span></h2>
-              <p className="font-hindi text-2xl mb-4">अतिरिक्त सेवाएं</p>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+        <section className="py-12 md:py-20 bg-muted/30">
+          <div className="container mx-auto px-4 sm:px-6">
+            <div className="text-center mb-8 md:mb-16">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-3 md:mb-4">Additional <span className="text-gradient-gold">Services</span></h2>
+              <p className="font-hindi text-lg sm:text-xl md:text-2xl mb-3 md:mb-4">अतिरिक्त सेवाएं</p>
+              <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
                 We go beyond just food to ensure your event is a complete success.
               </p>
-              <p className="font-hindi text-lg text-muted-foreground max-w-2xl mx-auto mt-2">
+              <p className="font-hindi text-sm md:text-base text-muted-foreground max-w-2xl mx-auto mt-2">
                 हम आपके कार्यक्रम को पूरी तरह सफल बनाने के लिए केवल भोजन से आगे जाते हैं।
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
               {additionalServices.map((service, index) => (
                 <div 
                   key={index}
-                  className="glass-card p-6 hover-tilt animate-fade-in-up"
+                  className="glass-card p-4 md:p-6 hover-tilt animate-fade-in-up"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full mb-4">
-                    <service.icon className="w-6 h-6 text-primary" />
+                  <div className="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full mb-3 md:mb-4">
+                    <service.icon className="w-5 h-5 md:w-6 md:h-6 text-primary" />
                   </div>
-                  <h3 className="text-xl font-bold text-gradient-gold mb-1">{service.title}</h3>
-                  <p className="font-hindi text-md mb-2">{service.hindiTitle}</p>
-                  <p className="text-sm text-muted-foreground">{service.description}</p>
-                  <p className="font-hindi text-xs text-muted-foreground mt-2">{service.hindiDescription}</p>
+                  <h3 className="text-lg md:text-xl font-bold text-gradient-gold mb-1">{service.title}</h3>
+                  <p className="font-hindi text-base md:text-md mb-2">{service.hindiTitle}</p>
+                  <p className="text-xs md:text-sm text-muted-foreground">{service.description}</p>
+                  <p className="font-hindi text-[10px] md:text-xs text-muted-foreground mt-2">{service.hindiDescription}</p>
                 </div>
               ))}
             </div>
@@ -219,22 +219,22 @@ const ServicesPage = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-hero">
-          <div className="container mx-auto px-6 text-center">
-            <h2 className="text-4xl font-bold mb-6">Ready to Plan Your <span className="text-gradient-gold">Perfect Event?</span></h2>
-            <p className="font-hindi text-2xl mb-4">अपने परफेक्ट इवेंट की योजना बनाने के लिए तैयार हैं?</p>
-            <p className="text-xl text-muted-foreground mb-4 max-w-2xl mx-auto">
+        <section className="py-12 md:py-20 bg-hero">
+          <div className="container mx-auto px-4 sm:px-6 text-center">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-6">Ready to Plan Your <span className="text-gradient-gold">Perfect Event?</span></h2>
+            <p className="font-hindi text-lg sm:text-xl md:text-2xl mb-3 md:mb-4">अपने परफेक्ट इवेंट की योजना बनाने के लिए तैयार हैं?</p>
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-3 md:mb-4 max-w-2xl mx-auto">
               Contact us today for a personalized consultation and let us create an unforgettable culinary experience for your special occasion.
             </p>
-            <p className="font-hindi text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+            <p className="font-hindi text-sm md:text-base lg:text-lg text-muted-foreground mb-6 md:mb-8 max-w-2xl mx-auto">
               व्यक्तिगत परामर्श के लिए आज ही हमसे संपर्क करें और हमें अपने विशेष अवसर के लिए एक अविस्मरणीय पाक अनुभव बनाने दें।
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/contact" className="btn-hero-primary golden-glow inline-flex items-center justify-center">
-                Get Free Quote <span className="font-hindi text-sm ml-1">(निःशुल्क कोटेशन प्राप्त करें)</span>
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+              <Link to="/contact" className="btn-hero-primary golden-glow inline-flex items-center justify-center text-sm md:text-base py-3 px-4 md:px-8">
+                Get Free Quote <span className="font-hindi text-xs md:text-sm ml-1">(निःशुल्क कोटेशन प्राप्त करें)</span>
               </Link>
-              <Link to="/menu" className="btn-hero-secondary inline-flex items-center justify-center">
-                View Sample Menus <span className="font-hindi text-sm ml-1">(नमूना मेनू देखें)</span>
+              <Link to="/menu" className="btn-hero-secondary inline-flex items-center justify-center text-sm md:text-base py-3 px-4 md:px-8">
+                View Sample Menus <span className="font-hindi text-xs md:text-sm ml-1">(नमूना मेनू देखें)</span>
               </Link>
             </div>
           </div>
