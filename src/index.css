@@ -2,41 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Jagdammba Caterers Design System - Premium Dark Theme with Golden Accents */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Dark luxury background palette */
+    --background: 0 0% 8%;
+    --foreground: 45 100% 92%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Card system with dark elegance */
+    --card: 0 0% 12%;
+    --card-foreground: 45 100% 92%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 45 100% 92%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Golden primary theme */
+    --primary: 45 100% 65%;
+    --primary-foreground: 0 0% 8%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Elegant secondary with maroon touches */
+    --secondary: 0 50% 20%;
+    --secondary-foreground: 45 100% 92%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted tones for subtle elements */
+    --muted: 0 0% 18%;
+    --muted-foreground: 45 20% 65%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent golden highlights */
+    --accent: 45 90% 55%;
+    --accent-foreground: 0 0% 8%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 45 100% 92%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 0 0% 22%;
+    --input: 0 0% 15%;
+    --ring: 45 100% 65%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Premium gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 8%) 0%, hsl(0 35% 15%) 50%, hsl(0 50% 12%) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(45 100% 65%) 0%, hsl(38 90% 55%) 50%, hsl(45 100% 75%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 12% / 0.8) 0%, hsl(0 0% 8% / 0.9) 100%);
+    
+    /* Shadows and glows */
+    --shadow-luxury: 0 25px 50px -12px hsl(0 0% 0% / 0.5);
+    --shadow-golden: 0 0 30px hsl(45 100% 65% / 0.3);
+    --shadow-card: 0 10px 25px -5px hsl(0 0% 0% / 0.3);
+    
+    /* Animation variables */
+    --transition-luxury: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +118,128 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-x-hidden;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Hero button variants */
+  .btn-hero-primary {
+    @apply bg-gradient-to-r from-primary to-accent text-primary-foreground px-8 py-4 rounded-lg font-semibold shadow-[var(--shadow-golden)] hover:shadow-[var(--shadow-golden)] hover:scale-105 transition-[var(--transition-bounce)] relative overflow-hidden;
+  }
+
+  .btn-hero-secondary {
+    @apply backdrop-blur-md bg-white/10 border border-white/20 text-foreground px-8 py-4 rounded-lg font-semibold hover:bg-white/20 hover:scale-105 transition-[var(--transition-bounce)];
+  }
+
+  /* Floating animation for background elements */
+  .float-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+  }
+
+  /* Gradient text effects */
+  .text-gradient-gold {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Card glassmorphism */
+  .glass-card {
+    @apply backdrop-blur-md bg-card/80 border border-white/10 rounded-xl shadow-[var(--shadow-card)];
+  }
+
+  /* Parallax container */
+  .parallax-container {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+
+  /* Hover tilt effect */
+  .hover-tilt {
+    transition: var(--transition-luxury);
+  }
+
+  .hover-tilt:hover {
+    transform: perspective(1000px) rotateX(5deg) rotateY(10deg) scale(1.02);
+  }
+
+  /* Golden glow effect */
+  .golden-glow {
+    position: relative;
+  }
+
+  .golden-glow::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--gradient-gold);
+    opacity: 0;
+    transition: var(--transition-luxury);
+    z-index: -1;
+    filter: blur(10px);
+  }
+
+  .golden-glow:hover::before {
+    opacity: 0.3;
+  }
+}
+
+@layer utilities {
+  /* Custom animations */
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.6s ease-out forwards;
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Background utilities */
+  .bg-hero {
+    background: var(--gradient-hero);
+  }
+
+  .bg-golden {
+    background: var(--gradient-gold);
+  }
+
+  .bg-glass {
+    background: var(--gradient-card);
   }
 }
