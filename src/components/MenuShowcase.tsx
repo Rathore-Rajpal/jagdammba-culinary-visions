@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { openWhatsAppChat } from "@/lib/utils";
 import sweetsCollection from "@/assets/sweets-collection.jpg";
 import curryDishes from "@/assets/curry-dishes.jpg";
 
@@ -7,10 +8,10 @@ export const MenuShowcase = () => {
   const [activeCategory, setActiveCategory] = useState("sweets");
 
   const categories = [
-    { id: "sweets", name: "Sweets", emoji: "🍯" },
-    { id: "sabjis", name: "Sabjis", emoji: "🥘" },
-    { id: "namkeen", name: "Namkeen", emoji: "🥜" },
-    { id: "specialties", name: "Specialties", emoji: "⭐" },
+    { id: "sweets", name: "Sweets", hindiName: "मिठाई", emoji: "🍯" },
+    { id: "sabjis", name: "Sabjis", hindiName: "सब्जियाँ", emoji: "🥘" },
+    { id: "namkeen", name: "Namkeen", hindiName: "नमकीन", emoji: "🥜" },
+    { id: "specialties", name: "Specialties", hindiName: "विशेषताएं", emoji: "⭐" },
   ];
 
   const menuItems = {
@@ -66,7 +67,10 @@ export const MenuShowcase = () => {
               } px-6 py-3`}
             >
               <span className="mr-2 text-lg">{category.emoji}</span>
-              {category.name}
+              <div className="flex flex-col">
+                <span>{category.name}</span>
+                <span className="text-xs font-hindi">{category.hindiName}</span>
+              </div>
             </Button>
           ))}
         </div>
@@ -95,7 +99,13 @@ export const MenuShowcase = () => {
         </div>
 
         <div className="text-center mt-12">
-          <Button className="btn-hero-primary golden-glow">
+          <Button 
+            className="btn-hero-primary golden-glow"
+            onClick={() => openWhatsAppChat(
+              "Complete Menu", 
+              "Hello! I am interested in seeing your complete menu with detailed pricing information. Could you please share the full menu with me?"
+            )}
+          >
             View Complete Menu
           </Button>
         </div>

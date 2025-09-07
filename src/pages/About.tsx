@@ -40,8 +40,7 @@ const AboutPage = () => {
             <span className="text-gradient-gold">About</span> Jagdammba Caterers
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Crafting culinary experiences that bring families together and create lasting memories for over 25 years.
-          </p>
+पिछले 25 वर्षों से, हम ऐसे पाक अनुभव गढ़ रहे हैं जो परिवारों को साथ लाएँ और यादें हमेशा के लिए संजो दें          </p>
         </div>
       </section>
 
@@ -52,13 +51,13 @@ const AboutPage = () => {
             <div className="animate-fade-in-up">
               <h2 className="text-4xl font-bold mb-6 text-gradient-gold">Our Story</h2>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                Founded with a vision to bring authentic flavors to every celebration, Jagdammba Caterers has been the trusted choice for families across the region. What started as a small family business has grown into a renowned catering service, yet we maintain the same personal touch and attention to detail that made us who we are.
+                Founded with a vision to bring authentic flavors to every celebration, Jagdammba Caterers has been the trusted choice for families across Jodhpur. What began as a small family business has now grown into a renowned catering service—while keeping the same personal touch alive.
               </p>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                Our journey is rooted in tradition, driven by innovation, and guided by our commitment to excellence. Every event we cater is an opportunity to showcase our passion for food and our dedication to creating unforgettable experiences.
+                We specialize in weddings, birthday parties, and social events, offering a perfect blend of traditional flavors and modern presentation. From intimate family gatherings to grand wedding celebrations, we make sure every detail reflects excellence.
               </p>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                From intimate family gatherings to grand wedding celebrations, we understand that food is more than sustenance—it's the heart of every celebration, the catalyst for connection, and the foundation of cherished memories.
+              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+                हर शादी, जन्मदिन और खास आयोजन को हम अपने स्वाद और सेवा से यादगार बना देते हैं। जगदम्बा कैटरर्स – जहाँ परंपरा और आधुनिकता का संगम मिलता है
               </p>
             </div>
 

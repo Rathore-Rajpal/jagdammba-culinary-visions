@@ -1,12 +1,13 @@
 import { Users, Clock, Award, Utensils } from "lucide-react";
 import chefCooking from "@/assets/chef-cooking.jpg";
+import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
 
 export const About = () => {
   const stats = [
-    { icon: Utensils, value: "500+", label: "Events Catered", delay: "0s" },
-    { icon: Award, value: "100+", label: "Food Varieties", delay: "0.2s" },
-    { icon: Clock, value: "25+", label: "Years of Expertise", delay: "0.4s" },
-    { icon: Users, value: "1000+", label: "Happy Families", delay: "0.6s" },
+    { icon: Utensils, value: "645", label: "Events Catered", delay: "0s" },
+    { icon: Award, value: "123", label: "Food Varieties", delay: "0.2s" },
+    { icon: Clock, value: "27", label: "Years of Expertise", delay: "0.4s" },
+    { icon: Users, value: "1001", label: "Happy Families", delay: "0.6s" },
   ];
 
   return (
@@ -20,12 +21,12 @@ export const About = () => {
             </h2>
             
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-              Jagdammba Caterers brings you authentic taste, professional catering, and flawless service for every occasion. With decades of expertise, we make your celebrations truly unforgettable.
+              Jagdammba Caterers brings you the authentic taste of Jodhpur, professional catering, and flawless service for every occasion. With decades of expertise, we make your celebrations in the Blue City truly unforgettable.
+
+From intimate family gatherings to grand wedding celebrations, we craft culinary experiences that blend Jodhpur’s rich traditional flavors with modern presentation, ensuring every dish tells a story of love, heritage, and taste.
             </p>
             
-            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-              From intimate family gatherings to grand wedding celebrations, we craft culinary experiences that blend traditional flavors with modern presentation, ensuring every dish tells a story of love and tradition.
-            </p>
+            
 
             {/* Stats Grid */}
             <div className="grid grid-cols-2 gap-6">
@@ -36,7 +37,7 @@ export const About = () => {
                   style={{ animationDelay: stat.delay }}
                 >
                   <stat.icon className="w-8 h-8 text-primary mx-auto mb-3 group-hover:scale-110 transition-transform" />
-                  <div className="text-2xl font-bold text-gradient-gold mb-1">{stat.value}</div>
+                  <AnimatedNumber value={stat.value} className="text-2xl font-bold text-gradient-gold mb-1" />
                   <div className="text-sm text-muted-foreground">{stat.label}</div>
                 </div>
               ))}
