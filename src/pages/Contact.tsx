@@ -36,7 +36,7 @@ const ContactPage = () => {
     {
       icon: Mail,
       title: "Email",
-      details: ["info@jagdammbacaterers.com"],
+      details: ["info@jagdambacaterers.com"],
       action: "Send Email"
     },
     {
@@ -188,7 +188,7 @@ const ContactPage = () => {
         <section className="py-12 md:py-16 lg:py-20 bg-hero">
           <div className="container mx-auto px-4 sm:px-6 text-center">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4 md:mb-6">
-              Contact <span className="text-gradient-gold">Jagdammba Caterers</span>
+              Contact <span className="text-gradient-gold">Jagdamba Caterers</span>
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
               Ready to plan your perfect event? Get in touch with us for personalized consultation and competitive quotes.
@@ -462,11 +462,11 @@ const ContactPage = () => {
                 For urgent inquiries or last-minute bookings, contact us directly via phone or WhatsApp.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-                <a href="tel:+919928649209" className="btn-hero-primary golden-glow flex items-center justify-center text-xs sm:text-sm">
+                <a href="tel:+918769480205" className="btn-hero-primary golden-glow flex items-center justify-center text-xs sm:text-sm">
                   <Phone className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 animate-pulse" />
-                  Call Now: +91 99286 49209
+                  Call Now: +91 87694 80205
                 </a>
-                <a href="https://wa.me/919928649209" target="_blank" rel="noopener noreferrer" className="btn-hero-secondary flex items-center justify-center text-xs sm:text-sm">
+                <a href="https://wa.me/918769480205" target="_blank" rel="noopener noreferrer" className="btn-hero-secondary flex items-center justify-center text-xs sm:text-sm">
                   <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" />
                   WhatsApp Chat
                 </a>

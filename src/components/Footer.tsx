@@ -11,8 +11,8 @@ export const Footer = () => {
   ];
 
   const contactInfo = [
-    { icon: Phone, text: "+91 98765 43210", href: "tel:+919876543210" },
-    { icon: Mail, text: "info@jagdammbacaterers.com", href: "mailto:info@jagdammbacaterers.com" },
+    { icon: Phone, text: "+91 87694 80205", href: "tel:+918769480205" },
+    { icon: Mail, text: "info@jagdambacaterers.com", href: "mailto:info@jagdambacaterers.com" },
     { icon: MapPin, text: "123 Catering Street, Food City, FC 12345" },
     { icon: Clock, text: "Mon-Sun: 6:00 AM - 11:00 PM" },
   ];
@@ -26,10 +26,10 @@ export const Footer = () => {
             <div className="flex items-center">
               <img 
                 src="/logo.png" 
-                alt="Jagdammba Caterers Logo" 
+                alt="Jagdamba Caterers Logo" 
                 className="w-10 h-10 mr-3" 
               />
-              <span className="text-2xl font-bold text-gradient-gold">Jagdammba</span>
+              <span className="text-2xl font-bold text-gradient-gold">Jagdamba</span>
             </div>
             <p className="text-sm md:text-base text-muted-foreground">
               Creating delicious memories through authentic flavors and exceptional catering services for over 25 years.
@@ -102,7 +102,7 @@ export const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-primary/20 mt-8 md:mt-12 pt-6 md:pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-xs md:text-sm text-muted-foreground text-center md:text-left">
-            © 2024 Jagdammba Caterers. All rights reserved. Crafted with ❤️ for food lovers.
+            © 2024 Jagdamba Caterers. All rights reserved. Crafted with ❤️ for food lovers.
           </p>
           <div className="flex items-center space-x-4 mt-4 md:mt-0">
             <Link to="/privacy-policy" className="text-xs md:text-sm text-muted-foreground hover:text-primary transition-colors">Privacy Policy</Link>
@@ -115,7 +115,7 @@ export const Footer = () => {
       {/* Floating WhatsApp Button */}
       <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
         <a 
-          href="https://wa.me/919928649209" 
+          href="https://wa.me/918769480205" 
           target="_blank" 
           rel="noopener noreferrer" 
           className="w-12 h-12 sm:w-14 sm:h-14 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 animate-pulse hover:animate-none"

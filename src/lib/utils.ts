@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 // WhatsApp utility function
 export function openWhatsAppChat(itemName: string, customMessage?: string) {
   // Business phone number - with country code without +
-  const phoneNumber = "919928649209";
+  const phoneNumber = "918769480205";
   
   // Default message with item name
   const defaultMessage = `Hi, I would like to enquire about ${itemName}.`;
