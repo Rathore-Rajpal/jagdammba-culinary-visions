@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Search, Filter } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { openWhatsAppChat } from "@/lib/utils";
+import { openWhatsAppChat, cn } from "@/lib/utils";
 import sweetsCollection from "@/assets/sweets-collection.jpg";
 import curryDishes from "@/assets/curry-dishes.jpg";
 import heroThali from "@/assets/hero-thali.jpg";
@@ -14,6 +14,164 @@ import rotiImage from "@/assets/roti.png";
 import saladImage from "@/assets/Salad.png";
 import snacksImage from "@/assets/salty snaks.png";
 import stallItemsImage from "@/assets/stall items.png";
+
+// Function to get menu item image path
+const getMenuItemImagePath = (itemName: string, hindiName?: string) => {
+  // Use the public folder path for images
+  const IMAGES_PATH = "/jadamba-images/"; 
+
+  try {
+    // If we have a hindi name, use that for the image path
+    if (hindiName) {
+      return `${IMAGES_PATH}${hindiName}.png`;
+    }
+    
+    // Hindi name mapping for common items without explicit hindi names
+    const hindiNameMap: Record<string, string> = {
+      // Sweets
+      "Lapsi": "लाप्सी",
+      "Dal Badam Halwa": "दाल बादाम हलवा",
+      "Kaju Akhrot Halwa": "काजू अखरोट हलवा",
+      "Anjir Katli": "अंजीर कतली",
+      "Kaju Roll": "काजू रोल",
+      "Pista Roll": "पिस्ता रोल",
+      "Butter Scotch Halwa": "बटर स्कॉच हलवा",
+      "Panchmewa Chakki": "पंचमेवा चक्की",
+      "Rabdi Malpua": "रबड़ी मालपुआ",
+      "Mawa Barfi": "मावा बर्फी",
+      "Milk Cake": "मिल्क केक",
+      "Atta Malpua": "आटा मालपुआ",
+      "Gulab Jamun": "गुलाब जामुन",
+      "Cutting Gulab Jamun": "कटिंग गुलाब जामुन",
+      "Kaju Pista Roll": "काजू पिस्ता रोल",
+      "Gajar Halwa": "गाजर हलवा",
+      "Bundi": "बुन्दी",
+      "Besan Chakki": "बेसन चक्की",
+      "Dal Badam Chakki": "दाल बादाम चक्की",
+      "Motipak Chakki": "मोतीपाक चक्की",
+      "Balushahi": "बालूशाही",
+      "Guniya": "गुनिया",
+      "Rabdi Ghewar": "रबड़ी घेवर",
+      "Sada Ghewar": "सादा घेवर",
+      "Surma Laddu": "सुरमा लड्डू",
+      "Bundi Laddu": "बूंदी लड्डू",
+      "Fruit Cream": "फ्रूट क्रीम",
+      "Sponge Rasgulla": "स्पन्ज रसगुला",
+      "Kesar Rajbhog": "केशर राजभोग",
+      "Malai Rajbhog": "मलाई राजभोग",
+      "Chamcham": "चमचम",
+      "Kesar Chamcham": "केशर चमचम",
+      "Ras Malai": "रस मलाई",
+      "Ras Madhuri": "रस माधुरी",
+      "Chhena Roll": "छैना रोल",
+      "Chhena Toast": "छैना टोस्ट",
+      "Khushbani": "खुशबानी",
+      "Kheer Chamcham": "खीर चमचम",
+      "Kesar Bati": "केशर बाटी",
+      "Khajur Pak": "खजूर पाक",
+      "Kaju Kesarpak": "काजू केसरपाक",
+      "Gulkand Barfi": "गुलकंद बर्फी",
+      "Sangam Dryfruit": "संगम ड्राईफ्रूट",
+      "Anjir Patasha": "अंजीर पताशा",
+      "Imarti": "इमरती",
+      "Jalebi": "जलेबी",
+      "Motichur Laddu": "मोतीचूर लड्डू",
+      "Gur Pak": "गुड़ पाक",
+      "Tiranga Halwa": "तिर्गा हलवा",
+      
+      // Vegetables
+      "Shahi Paneer": "शाही पनीर",
+      "Matar Paneer": "मटर पनीर",
+      "Palak Paneer": "पालक पनीर",
+      "Haldi Matar": "हल्दी मटर",
+      "Gulabjamun Sabji": "गुलाबजामुन सब्जी",
+      "Govind Gatta": "गोविन्द गट्टा",
+      "Chakki Sabji": "चक्की सब्जी",
+      "Mix Veg": "मिक्स वेज",
+      "Gobhi Tamatar Matar": "गोभी टमाटर मटर",
+      "Bhindi Shimla Mirchi Fry": "भिंडी शिमला मिर्ची फ्राई",
+      "Malai Pyaj Sabji": "मलाई प्याज सब्जी",
+      "Lahsun Chutney": "लहसुन चटनी",
+      "Mewa Moyer": "मेवा मोयर",
+      "Kaju Kari Sabji": "काजू करी सब्जी",
+      "Pankaj Kutta Sabji": "पंकज कट्टा सब्जी",
+      "Gajar Muli Achar": "गाजर मूली अचार",
+      "Mirchi Kuta": "मिर्ची कुटा",
+      "Keri Gunda": "केरी गुन्दा",
+      "Dal Fry": "दाल फ्राई",
+      "Dal Makhani": "दाल मक्खनी",
+      "Sambhar Dal": "सांभर दाल",
+      "Bhindi Masala": "भिंडी मसाला",
+      "Sarso ka Saag": "सरसो का साग",
+      "Shahi Raita": "शाही रायता",
+      "Vegetable Raita": "वेजीटेबल रायता",
+      
+      // Breakfast
+      "Jalebi Imarti": "जलेबी इमरती",
+      "Idli": "इडली",
+      "Sambhar": "सांभर",
+      "Poha": "पोहा",
+      "Upma": "उपमा",
+      "Moyan Kachori": "मोयन कचोरी",
+      "Pyaz Kachori": "प्याज़ कचोरी",
+      "Kachori": "कचोरी",
+      "Bread Pakoda": "ब्रेड पकौड़ा",
+      "Paneer Pakoda": "पनीर पकौड़ा",
+      "Mix Pakoda": "मिक्स पकौड़ा",
+      "Kesar Puri": "केशर पूर",
+      
+      // Snacks
+      // "Mewa Moyer" entry already exists above
+      "Mewa Madhur": "मेवा मधुर",
+      "Dal Moth": "दाल मोठ",
+      "Mix Namkeen": "मिक्स नमकीन",
+      
+      // Rice
+      "Jeera Rice": "जीरा राईस",
+      "Sada Chawal": "सादा चावल",
+      "Ram Khichdi": "राम खिचड़ी",
+      
+      // Roti
+      "Plain Roti": "प्लेन रोटी",
+      "Tawa Roti": "तवा रोटी",
+      "Puri": "पूरी",
+      "Methi Puri": "मैथी पूरी",
+      "Rumali Roti": "रुमाली रोटी",
+      "Butter Naan": "बटर नान",
+      
+      // Salad
+      "Moth Fry": "मोठ फ्राई",
+      "Chana Fry": "चना फ्राई",
+      "Ankurit Salad": "अंकुरित सलाद",
+      "Kheera": "खीरा",
+      "Tamatar": "टमाटर",
+      "Pyaz": "प्याज",
+      "Mooli": "मूली",
+      "Gajar": "गाजर",
+      
+      // Stall Items
+      "Aloo Tikki": "आल टिक्की",
+      "Coffee": "कॉफी",
+      "Ice Cream": "आईस्क्रीम",
+      "Paneer Chilli": "पनीर चिल्ली",
+      "American Makka": "अमेरिकन मक्का",
+      "Chuski Machine": "चुस्की मशीन",
+      "Popcorn Machine": "पोपकार्ण मशीन",
+      "Gudiya Bal": "गुड़िया बाल",
+    };
+    
+    // Try to find a hindi name mapping
+    if (hindiNameMap[itemName]) {
+      return `${IMAGES_PATH}${hindiNameMap[itemName]}.png`;
+    }
+    
+    // Fallback to category images if specific image isn't found
+    return null;
+  } catch (error) {
+    console.error(`Error loading image for ${itemName}:`, error);
+    return null;
+  }
+};
 
 const MenuPage = () => {
   const [activeCategory, setActiveCategory] = useState("all");
@@ -331,57 +489,76 @@ const MenuPage = () => {
 
           {/* Menu Items Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
-            {filteredItems.map((item, index) => (
-              <div 
-                key={index}
-                className="glass-card hover-tilt group animate-scale-in"
-                style={{ animationDelay: `${index * 0.05}s` }}
-              >
-                <div className="relative overflow-hidden rounded-t-lg">
-                  <img 
-                    src={item.image} 
-                    alt={item.name}
-                    className="w-full h-36 sm:h-40 md:h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                </div>
-                
-                <div className="p-4 md:p-6">
-                  <h3 className="text-base md:text-lg font-semibold text-gradient-gold mb-1 md:mb-2">
-                    {item.name}
-                    <span className="text-[10px] md:text-xs text-muted-foreground block mt-0.5 md:mt-1 font-hindi">
-                      {item.hindiName || (
-                        item.category === "sweets" ? "मिठाई" : 
-                        item.category === "vegetables" ? "शाही सब्जियां" :
-                        item.category === "breakfast" ? "नाश्ता" :
-                        item.category === "snacks" ? "नमकीन" :
-                        item.category === "stall" ? "स्टॉल" :
-                        item.category === "salad" ? "सलाद" :
-                        item.category === "roti" ? "रोटी" :
-                        item.category === "rice" ? "चावल" : ""
-                      )}
-                    </span>
-                  </h3>
-                  <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4">{item.description}</p>
-                  <div className="flex justify-between items-center">
-                    <span className="text-[10px] md:text-xs uppercase text-primary font-medium">
-                      {categories.find(c => c.id === item.category)?.name}
-                    </span>
-                    <Button 
-                      size="sm" 
-                      className="btn-hero-primary text-xs md:text-sm py-1 h-7 md:h-8"
-                      onClick={() => openWhatsAppChat(
-                        item.name, 
-                        `Hello! I am interested in ordering "${item.name}". Could you please provide pricing and availability information?`
-                      )}
-                    >
-                      Enquire
-                    </Button>
+            {filteredItems.map((item, index) => {
+              // Get specific image path for this menu item if available
+              const specificImagePath = getMenuItemImagePath(item.name, item.hindiName);
+              
+              return (
+                <div 
+                  key={index}
+                  className="glass-card hover-tilt group animate-scale-in"
+                  style={{ animationDelay: `${index * 0.05}s` }}
+                >
+                  <div className="relative overflow-hidden rounded-t-lg">
+                    <div className="w-full h-36 sm:h-40 md:h-48 bg-white flex items-center justify-center p-2">
+                      <img 
+                        src={specificImagePath || item.image} 
+                        alt={item.name}
+                        className={cn(
+                          "group-hover:scale-110 transition-transform duration-500",
+                          specificImagePath ? "max-w-full max-h-full object-contain" : "w-full h-full object-cover"
+                        )}
+                        loading="lazy"
+                        onError={(e) => {
+                          // Fallback to category image if specific image fails to load
+                          const target = e.target as HTMLImageElement;
+                          target.onerror = null;
+                          target.src = item.image;
+                          target.className = "w-full h-full object-cover group-hover:scale-110 transition-transform duration-500";
+                        }}
+                      />
+                    </div>
+                    {!specificImagePath && (
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    )}
+                  </div>
+                  
+                  <div className="p-4 md:p-6">
+                    <h3 className="text-base md:text-lg font-semibold text-gradient-gold mb-1 md:mb-2">
+                      {item.name}
+                      <span className="text-[10px] md:text-xs text-muted-foreground block mt-0.5 md:mt-1 font-hindi">
+                        {item.hindiName || (
+                          item.category === "sweets" ? "मिठाई" : 
+                          item.category === "vegetables" ? "शाही सब्जियां" :
+                          item.category === "breakfast" ? "नाश्ता" :
+                          item.category === "snacks" ? "नमकीन" :
+                          item.category === "stall" ? "स्टॉल" :
+                          item.category === "salad" ? "सलाद" :
+                          item.category === "roti" ? "रोटी" :
+                          item.category === "rice" ? "चावल" : ""
+                        )}
+                      </span>
+                    </h3>
+                    <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4">{item.description}</p>
+                    <div className="flex justify-between items-center">
+                      <span className="text-[10px] md:text-xs uppercase text-primary font-medium">
+                        {categories.find(c => c.id === item.category)?.name}
+                      </span>
+                      <Button 
+                        size="sm" 
+                        className="btn-hero-primary text-xs md:text-sm py-1 h-7 md:h-8"
+                        onClick={() => openWhatsAppChat(
+                          item.name, 
+                          `Hello! I am interested in ordering "${item.name}". Could you please provide pricing and availability information?`
+                        )}
+                      >
+                        Enquire
+                      </Button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {filteredItems.length === 0 && (

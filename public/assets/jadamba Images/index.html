@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jagdamba Images Directory</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #8B4513;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+        }
+        .image-item {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+            border-radius: 8px;
+            background: white;
+        }
+        .image-item img {
+            max-width: 100%;
+            height: 150px;
+            object-fit: contain;
+        }
+        .image-name {
+            margin-top: 8px;
+            font-size: 14px;
+            word-break: break-word;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jagdamba Menu Images</h1>
+    <p>This is a directory of all menu item images available for the Jagdamba Caterers website.</p>
+    
+    <div class="gallery" id="gallery">
+        <!-- Images will be populated via JavaScript -->
+    </div>
+
+    <script>
+        // This script lists all png images in the current directory
+        const gallery = document.getElementById('gallery');
+        
+        // Function to create image elements
+        async function fetchAndDisplayImages() {
+            try {
+                // Get a list of all files in this directory
+                const response = await fetch('.');
+                const text = await response.text();
+                
+                // Simple parsing to extract links to PNG files
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(text, 'text/html');
+                const links = Array.from(doc.querySelectorAll('a'));
+                
+                // Filter for PNG files
+                const pngLinks = links.filter(link => link.href.toLowerCase().endsWith('.png'));
+                
+                // Create elements for each image
+                pngLinks.forEach(link => {
+                    const fileName = link.textContent || link.href.split('/').pop();
+                    
+                    const imageItem = document.createElement('div');
+                    imageItem.className = 'image-item';
+                    
+                    const img = document.createElement('img');
+                    img.src = fileName;
+                    img.alt = fileName;
+                    img.loading = 'lazy';
+                    
+                    const nameElem = document.createElement('div');
+                    nameElem.className = 'image-name';
+                    nameElem.textContent = fileName;
+                    
+                    imageItem.appendChild(img);
+                    imageItem.appendChild(nameElem);
+                    gallery.appendChild(imageItem);
+                });
+                
+                // Add count to the top
+                const countInfo = document.createElement('p');
+                countInfo.textContent = `Total: ${pngLinks.length} menu item images`;
+                document.body.insertBefore(countInfo, gallery);
+                
+            } catch (error) {
+                console.error('Error loading images:', error);
+                gallery.innerHTML = '<p>Error loading images. This directory listing may not be supported by the server.</p>';
+            }
+        }
+        
+        fetchAndDisplayImages();
+    </script>
+</body>
+</html>
