@@ -235,7 +235,7 @@ const ContactPage = () => {
                       {info.action}
                     </a>
                   ) : info.title.includes("Address") ? (
-                    <a href={`https://maps.google.com/?q=${encodeURIComponent(info.details.join(', '))}`} target="_blank" rel="noopener noreferrer" className="btn-hero-primary w-full golden-glow flex items-center justify-center text-xs sm:text-sm">
+                    <a href="https://www.google.com/maps/place/vijay+dairy+%26+provision+store/@26.2283726,73.0236435,17z/data=!4m6!3m5!1s0x39418b91910ea595:0xa23c230732f13d12!8m2!3d26.2283728!4d73.023645!16s%2Fg%2F11cm0kfn0h?entry=ttu" target="_blank" rel="noopener noreferrer" className="btn-hero-primary w-full golden-glow flex items-center justify-center text-xs sm:text-sm">
                       <MapPin className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" />
                       {info.action}
                     </a>
@@ -489,7 +489,7 @@ const ContactPage = () => {
                 1/1, D.D.P. Nagar, Madhuban Housing Board, Basni, Jodhpur
               </p>
               <a 
-                href="https://maps.google.com/?q=1/1, D.D.P. Nagar, Madhuban Housing Board, Basni, Jodhpur" 
+                href="https://www.google.com/maps/place/vijay+dairy+%26+provision+store/@26.2283726,73.0236435,17z/data=!4m6!3m5!1s0x39418b91910ea595:0xa23c230732f13d12!8m2!3d26.2283728!4d73.023645!16s%2Fg%2F11cm0kfn0h?entry=ttu" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="btn-hero-primary golden-glow inline-flex items-center justify-center text-xs sm:text-sm"
