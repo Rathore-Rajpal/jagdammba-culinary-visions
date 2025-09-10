@@ -1,9 +1,33 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { openWhatsAppChat } from "@/lib/utils";
+import { openWhatsAppChat, cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
 import sweetsCollection from "@/assets/sweets-collection.jpg";
 import curryDishes from "@/assets/curry-dishes.jpg";
+import riceImage from "@/assets/rice.png";
+import rotiImage from "@/assets/roti.png";
+import saladImage from "@/assets/Salad.png";
+import snacksImage from "@/assets/salty snaks.png";
+import stallItemsImage from "@/assets/stall items.png";
+
+// Function to get menu item image path
+const getMenuItemImagePath = (itemName: string, hindiName?: string) => {
+  // Use the public folder path for images
+  const IMAGES_PATH = "/jadamba-images/"; 
+
+  try {
+    // If we have a hindi name, use that for the image path
+    if (hindiName) {
+      return `${IMAGES_PATH}${hindiName}.png`;
+    }
+    
+    // Fallback to category images if specific image isn't found
+    return null;
+  } catch (error) {
+    console.error(`Error loading image for ${itemName}:`, error);
+    return null;
+  }
+};
 
 export const MenuShowcase = () => {
   const [activeCategory, setActiveCategory] = useState("sweets");
@@ -17,28 +41,28 @@ export const MenuShowcase = () => {
 
   const menuItems = {
     sweets: [
-      { name: "Gulab Jamun", description: "Soft milk dumplings in cardamom syrup", image: sweetsCollection },
-      { name: "Rasgulla", description: "Spongy cheese balls in sugar syrup", image: sweetsCollection },
-      { name: "Kaju Katli", description: "Diamond-shaped cashew delights", image: sweetsCollection },
-      { name: "Jalebi", description: "Crispy spiral sweets in saffron syrup", image: sweetsCollection },
+      { name: "Gulab Jamun", hindiName: "गुलाब जामुन", description: "Soft milk dumplings in cardamom syrup", image: sweetsCollection },
+      { name: "Sponge Rasgulla", hindiName: "स्पन्ज रसगुला", description: "Spongy cheese balls in sugar syrup", image: sweetsCollection },
+      { name: "Anjir Katli", hindiName: "अंजीर कतली", description: "Fig-based sweet delicacy", image: sweetsCollection },
+      { name: "Jalebi", hindiName: "जलेबी", description: "Crispy spiral sweets in saffron syrup", image: sweetsCollection },
     ],
     sabjis: [
-      { name: "Paneer Butter Masala", description: "Creamy tomato-based cottage cheese curry", image: curryDishes },
-      { name: "Dal Makhani", description: "Rich black lentils in creamy gravy", image: curryDishes },
-      { name: "Aloo Gobi", description: "Spiced potatoes and cauliflower", image: curryDishes },
-      { name: "Palak Paneer", description: "Cottage cheese in spinach gravy", image: curryDishes },
+      { name: "Shahi Paneer", hindiName: "शाही पनीर", description: "Royal cottage cheese curry", image: curryDishes },
+      { name: "Dal Makhani", hindiName: "दाल मक्खनी", description: "Rich black lentils in creamy gravy", image: curryDishes },
+      { name: "Aloo Gobi", hindiName: "आलू गोभी", description: "Spiced potatoes and cauliflower", image: curryDishes },
+      { name: "Palak Paneer", hindiName: "पालक पनीर", description: "Cottage cheese in spinach gravy", image: curryDishes },
     ],
     namkeen: [
-      { name: "Samosa", description: "Crispy triangular pastries with spiced filling", image: curryDishes },
-      { name: "Dhokla", description: "Steamed savory cake from Gujarat", image: curryDishes },
-      { name: "Kachori", description: "Flaky pastries with lentil filling", image: curryDishes },
-      { name: "Pakora", description: "Deep-fried vegetable fritters", image: curryDishes },
+      { name: "Mewa Moyer", hindiName: "मेवा मोयर", description: "Dry fruit based snack", image: snacksImage },
+      { name: "Mewa Madhur", hindiName: "मेवा मधुर", description: "Sweet and savory dry fruit mix", image: snacksImage },
+      { name: "Dal Moth", hindiName: "दाल मोठ", description: "Lentil-based snack", image: snacksImage },
+      { name: "Mix Namkeen", hindiName: "मिक्स नमकीन", description: "Assorted savory mix", image: snacksImage },
     ],
     specialties: [
-      { name: "Royal Thali", description: "Complete meal with variety of dishes", image: sweetsCollection },
-      { name: "Wedding Special", description: "Grand feast for special occasions", image: curryDishes },
-      { name: "Festival Combo", description: "Traditional festival delicacies", image: sweetsCollection },
-      { name: "Premium Platter", description: "Curated selection of finest dishes", image: curryDishes },
+      { name: "Tandoori Roti", hindiName: "तंदूरी रोटी", description: "Clay oven baked flatbread", image: stallItemsImage },
+      { name: "Rumali Roti", hindiName: "रुमाली रोटी", description: "Thin handkerchief bread", image: stallItemsImage },
+      { name: "Khichdi", hindiName: "खिचड़ी", description: "Rice and lentil porridge", image: riceImage },
+      { name: "Matar Pulao", hindiName: "मटर पुलाव", description: "Peas pilaf", image: riceImage },
     ],
   };
 
@@ -85,15 +109,37 @@ export const MenuShowcase = () => {
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="relative mb-4 overflow-hidden rounded-lg">
-                <img 
-                  src={item.image} 
-                  alt={item.name}
-                  className="w-full h-40 md:h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                <div className="w-full h-40 md:h-48 bg-white flex items-center justify-center p-2">
+                  {/* Get specific image path for this menu item if available */}
+                  {(() => {
+                    const specificImagePath = getMenuItemImagePath(item.name, item.hindiName);
+                    return (
+                      <img 
+                        src={specificImagePath || item.image} 
+                        alt={item.name}
+                        className={cn(
+                          "group-hover:scale-110 transition-transform duration-500",
+                          specificImagePath ? "max-w-full max-h-full object-contain" : "w-full h-full object-cover"
+                        )}
+                        loading="lazy"
+                        onError={(e) => {
+                          // Fallback to category image if specific image fails to load
+                          const target = e.target as HTMLImageElement;
+                          target.onerror = null;
+                          target.src = item.image;
+                          target.className = "w-full h-full object-cover group-hover:scale-110 transition-transform duration-500";
+                        }}
+                      />
+                    );
+                  })()}
+                </div>
+                {!getMenuItemImagePath(item.name, item.hindiName) && (
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                )}
               </div>
               
-              <h3 className="text-lg md:text-xl font-semibold text-gradient-gold mb-2">{item.name}</h3>
+              <h3 className="text-lg md:text-xl font-semibold text-gradient-gold mb-1">{item.name}</h3>
+              <p className="text-xs md:text-sm font-hindi mb-2">{item.hindiName}</p>
               <p className="text-xs md:text-sm text-muted-foreground">{item.description}</p>
             </div>
           ))}

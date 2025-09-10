@@ -26,17 +26,14 @@ const ContactPage = () => {
       icon: Phone,
       title: "Phone Numbers",
       details: [
-        "+91 99286 49209",
-        "+91 90797 50530",
-        "+91 87694 80205",
-        "+91 70147 14021"
+        "+91 87694 80205"
       ],
       action: "Call Now"
     },
     {
       icon: Mail,
       title: "Email",
-      details: ["info@jagdambacaterers.com"],
+      details: ["jagdambacatrers@gmail.com"],
       action: "Send Email"
     },
     {
@@ -47,8 +44,8 @@ const ContactPage = () => {
     },
     {
       icon: MapPin,
-      title: "Home Address", 
-      details: ["6/38, D.D.P. Nagar, Madhuban Housing Board, Basni, Jodhpur"],
+      title: "Office Address - 2", 
+      details: ["1/1, D.D.P. Nagar, Madhuban Housing Board, Basni, Jodhpur"],
       action: "Get Directions"
     }
   ];

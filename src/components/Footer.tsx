@@ -12,8 +12,9 @@ export const Footer = () => {
 
   const contactInfo = [
     { icon: Phone, text: "+91 87694 80205", href: "tel:+918769480205" },
-    { icon: Mail, text: "info@jagdambacaterers.com", href: "mailto:info@jagdambacaterers.com" },
-    { icon: MapPin, text: "123 Catering Street, Food City, FC 12345" },
+    { icon: Mail, text: "jagdambacatrers@gmail.com", href: "mailto:jagdambacatrers@gmail.com" },
+    { icon: MapPin, text: "Office 1: 1/1, D.D.P. Nagar, Madhuban Housing Board, Basni, Jodhpur" },
+    { icon: MapPin, text: "Office 2: 1/1, D.D.P. Nagar, Madhuban Housing Board, Basni, Jodhpur" },
     { icon: Clock, text: "Mon-Sun: 6:00 AM - 11:00 PM" },
   ];
 
