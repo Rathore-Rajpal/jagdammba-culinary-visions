@@ -211,12 +211,12 @@ const TestimonialsNew = () => {
               {/* Bigger First Image */}
               <div className="col-span-2 md:col-span-1 md:row-span-2 relative group overflow-hidden rounded-lg">
                 <img 
-                  src="/testimonials/testimonial-1.png" 
+                  src="/testimonials/Gemini_Generated_Image_703epk703epk703e.png" 
                   alt="Wedding celebration" 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4">
-                  <p className="text-white font-medium">Royal Wedding Reception</p>
+                  <p className="text-white font-medium">Luxury Wedding Reception</p>
                   <p className="text-sm text-white/80">Jodhpur, Rajasthan</p>
                 </div>
               </div>
@@ -224,37 +224,37 @@ const TestimonialsNew = () => {
               {/* Regular Grid Images */}
               <div className="relative group overflow-hidden rounded-lg">
                 <img 
-                  src="/testimonials/testimonial-2.png" 
+                  src="/testimonials/Gemini_Generated_Image_9mekp09mekp09mek.png" 
                   alt="Corporate event" 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4">
-                  <p className="text-white font-medium">Corporate Dinner</p>
+                  <p className="text-white font-medium">Grand Engagement Party</p>
                   <p className="text-sm text-white/80">Jaipur</p>
                 </div>
               </div>
               
               <div className="relative group overflow-hidden rounded-lg">
                 <img 
-                  src="/testimonials/testimonial-4.png" 
-                  alt="Family celebration" 
+                  src="/testimonials/Gemini_Generated_Image_hqqkwwhqqkwwhqqk.png" 
+                  alt="Wedding celebration" 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4">
-                  <p className="text-white font-medium">Family Celebration</p>
+                  <p className="text-white font-medium">Traditional Ceremony</p>
                   <p className="text-sm text-white/80">Udaipur</p>
                 </div>
               </div>
               
               <div className="relative group overflow-hidden rounded-lg">
                 <img 
-                  src="/testimonials/testimonial-1 (1).png" 
-                  alt="Festival celebration" 
+                  src="/testimonials/Gemini_Generated_Image_nfqw06nfqw06nfqw.png" 
+                  alt="Wedding feast" 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4">
-                  <p className="text-white font-medium">Festival Gathering</p>
-                  <p className="text-sm text-white/80">Bikaner</p>
+                  <p className="text-white font-medium">Royal Dining Experience</p>
+                  <p className="text-sm text-white/80">Jaisalmer</p>
                 </div>
               </div>
             </div>
