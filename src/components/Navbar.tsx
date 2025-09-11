@@ -38,10 +38,13 @@ export const Navbar = () => {
           <Link to="/" className="flex items-center">
             <img 
               src="/logo.png" 
-              alt="Jagdamba Caterers Logo" 
+              alt="Jagdamba Caterers and Events Logo" 
               className="w-8 h-8 md:w-10 md:h-10 mr-2 md:mr-3" 
             />
-            <span className="text-lg md:text-xl font-bold text-gradient-gold">Jagdamba</span>
+            <div className="flex flex-col">
+              <span className="text-lg md:text-xl font-bold text-gradient-gold">Jagdamba</span>
+              <span className="text-xs md:text-sm text-muted-foreground -mt-1">Caterers and Events</span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}

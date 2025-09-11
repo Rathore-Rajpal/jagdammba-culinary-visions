@@ -37,7 +37,7 @@ const AboutPage = () => {
       <section className="py-12 md:py-20 bg-hero">
         <div className="container mx-auto px-4 sm:px-6 text-center">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
-            <span className="text-gradient-gold">About</span> Jagdammba Caterers
+            <span className="text-gradient-gold">About</span> Jagdamba Caterers
           </h1>
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
 पिछले 25 वर्षों से, हम ऐसे पाक अनुभव गढ़ रहे हैं जो परिवारों को साथ लाएँ और यादें हमेशा के लिए संजो दें          </p>
@@ -51,7 +51,7 @@ const AboutPage = () => {
             <div className="animate-fade-in-up order-2 lg:order-1">
               <h2 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6 text-gradient-gold">Our Story</h2>
               <p className="text-base md:text-lg text-muted-foreground mb-4 md:mb-6 leading-relaxed">
-                Founded with a vision to bring authentic flavors to every celebration, Jagdammba Caterers has been the trusted choice for families across Jodhpur. What began as a small family business has now grown into a renowned catering service—while keeping the same personal touch alive.
+                Founded with a vision to bring authentic flavors to every celebration, Jagdamba Caterers has been the trusted choice for families across Jodhpur. What began as a small family business has now grown into a renowned catering service—while keeping the same personal touch alive.
               </p>
               <p className="text-base md:text-lg text-muted-foreground mb-4 md:mb-6 leading-relaxed">
                 We specialize in weddings, birthday parties, and social events, offering a perfect blend of traditional flavors and modern presentation. From intimate family gatherings to grand wedding celebrations, we make sure every detail reflects excellence.
@@ -64,7 +64,7 @@ const AboutPage = () => {
             <div className="relative animate-scale-in mb-8 lg:mb-0 order-1 lg:order-2">
               <img 
                 src={chefCooking} 
-                alt="Professional Chef at Jagdammba Caterers"
+                alt="Professional Chef at Jagdamba Caterers"
                 className="w-full h-auto rounded-2xl shadow-[var(--shadow-luxury)] hover-tilt"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-2xl"></div>
@@ -125,7 +125,7 @@ const AboutPage = () => {
               <div className="flex flex-col items-center">
                 <img 
                   src="/logo.png" 
-                  alt="Jagdammba Caterers Logo" 
+                  alt="Jagdamba Caterers Logo" 
                   className="w-20 h-20 md:w-24 md:h-24 mb-4 md:mb-6" 
                 />
                 <h3 className="text-xl md:text-2xl font-bold text-gradient-gold mb-2 md:mb-4">Halwaai Uday Singh Bhati</h3>
@@ -142,7 +142,7 @@ const AboutPage = () => {
               <div className="flex flex-col items-center">
                 <img 
                   src="/logo.png" 
-                  alt="Jagdammba Caterers Logo" 
+                  alt="Jagdamba Caterers Logo" 
                   className="w-20 h-20 md:w-24 md:h-24 mb-4 md:mb-6" 
                 />
                 <h3 className="text-xl md:text-2xl font-bold text-gradient-gold mb-2 md:mb-4">Mahendra Singh Bhati</h3>

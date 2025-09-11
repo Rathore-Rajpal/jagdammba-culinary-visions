@@ -17,11 +17,14 @@ export const About = () => {
           {/* Content */}
           <div className="animate-fade-in-up order-2 lg:order-1">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 text-center lg:text-left">
-              <span className="text-gradient-gold">About</span> Jagdammba Caterers
+              <span className="text-gradient-gold">About</span> Jagdamba Caterers and Events
             </h2>
+            <div className="inline-block mb-4 text-sm sm:text-base md:text-lg px-3 py-1 bg-primary/10 rounded-full text-primary border border-primary/30">
+              <span className="font-semibold">Serving Delicious Memories Since 1997</span>
+            </div>
             
             <p className="text-base md:text-lg text-muted-foreground mb-6 md:mb-8 leading-relaxed">
-              Jagdammba Caterers brings you the authentic taste of Jodhpur, professional catering, and flawless service for every occasion. With decades of expertise, we make your celebrations in the Blue City truly unforgettable.
+              Jagdamba Caterers and Events brings you the authentic taste of Jodhpur, professional catering, and flawless event management since 1997. With decades of expertise, we make your celebrations in the Blue City truly unforgettable.
             </p>
             
             <p className="text-base md:text-lg text-muted-foreground mb-6 md:mb-8 leading-relaxed">
@@ -49,7 +52,7 @@ export const About = () => {
             <div className="relative group max-w-md mx-auto lg:max-w-full">
               <img 
                 src={chefCooking} 
-                alt="Professional Chef Cooking - Jagdammba Caterers"
+                alt="Professional Chef Cooking - Jagdamba Caterers"
                 className="w-full h-auto rounded-2xl shadow-[var(--shadow-luxury)]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-2xl"></div>

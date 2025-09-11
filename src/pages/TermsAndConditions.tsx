@@ -79,7 +79,7 @@ const TermsAndConditionsPage = () => {
                 <p>For questions about these Terms, reach out at:</p>
                 <ul className="list-none space-y-2">
                   <li>📍 <strong>Address:</strong> 1/1, D.D.P. Nagar, Madhuban Housing Board, Basni, Jodhpur</li>
-                  <li>📧 <strong>Email:</strong> info@jagdammbacaterers.com</li>
+                  <li>📧 <strong>Email:</strong> jagdambacatrers@gmail.com</li>
                   <li>📞 <strong>Phone:</strong> +91 99286 49209, +91 90797 50530</li>
                 </ul>
 

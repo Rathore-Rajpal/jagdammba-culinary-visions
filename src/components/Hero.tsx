@@ -32,11 +32,12 @@ export const Hero = () => {
           {/* Content - Mobile first approach with additional top margin for mobile */}
           <div className="text-center animate-fade-in-up mt-4 md:mt-0">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight pt-2">
-              <span className="text-gradient-gold">जगदम्बा कैटरर्स</span>
+              <span className="text-gradient-gold">जगदम्बा कैटरर्स और इवेंट्स</span>
               <br />
               <span className="inline-block mt-3 text-2xl sm:text-3xl text-gradient-gold font-bold" style={{ lineHeight: 1.2 }}>
-                 Delicious Memories 
+                 Delicious Memories Since 1997
               </span>
+              
             </h1>
             
             <p className="text-lg sm:text-xl text-muted-foreground mb-4 leading-relaxed px-2">
@@ -62,7 +63,7 @@ export const Hero = () => {
             <div className="relative group max-w-2xl mx-auto">
               <img 
                 src={heroThali} 
-                alt="Luxurious Indian Thali - Jagdammba Caterers"
+                alt="Luxurious Indian Thali - Jagdamba Caterers"
                 className="w-full h-auto rounded-2xl shadow-[var(--shadow-luxury)] transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>

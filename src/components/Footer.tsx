@@ -27,13 +27,17 @@ export const Footer = () => {
             <div className="flex items-center">
               <img 
                 src="/logo.png" 
-                alt="Jagdamba Caterers Logo" 
+                alt="Jagdamba Caterers and Events Logo" 
                 className="w-10 h-10 mr-3" 
               />
-              <span className="text-2xl font-bold text-gradient-gold">Jagdamba</span>
+              <div className="flex flex-col">
+                <span className="text-2xl font-bold text-gradient-gold">Jagdamba</span>
+                <span className="text-sm text-muted-foreground -mt-1">Caterers and Events</span>
+                <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full w-fit mt-1">Since 1997</span>
+              </div>
             </div>
             <p className="text-sm md:text-base text-muted-foreground">
-              Creating delicious memories through authentic flavors and exceptional catering services for over 25 years.
+              Creating delicious memories through authentic flavors and exceptional catering services since 1997.
             </p>
             <div className="flex space-x-4">
               <a 
@@ -105,18 +109,22 @@ export const Footer = () => {
           <div className="sm:col-span-2 md:col-span-1">
             <h3 className="text-lg font-semibold text-gradient-gold mb-4">Get Started</h3>
             <p className="text-muted-foreground text-sm mb-4">
-              Ready to plan your next event? Contact us for a personalized quote.
+              Ready to plan your next event? Call us for a personalized quote.
             </p>
-            <Link to="/contact" className="btn-hero-primary w-full golden-glow inline-flex items-center justify-center">
-              Book Now
-            </Link>
+            <a 
+              href="tel:+918769480205" 
+              className="btn-hero-primary w-full golden-glow inline-flex items-center justify-center"
+            >
+              <Phone className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+              Call to Book Now
+            </a>
           </div>
         </div>
 
         {/* Bottom Bar */}
         <div className="border-t border-primary/20 mt-8 md:mt-12 pt-6 md:pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-xs md:text-sm text-muted-foreground text-center md:text-left">
-            © 2024 Jagdamba Caterers. All rights reserved. Crafted with ❤️ for food lovers.
+            © 2024 Jagdamba Caterers and Events. All rights reserved. Serving with ❤️ since 1997.
           </p>
           <div className="flex items-center space-x-4 mt-4 md:mt-0">
             <Link to="/privacy-policy" className="text-xs md:text-sm text-muted-foreground hover:text-primary transition-colors">Privacy Policy</Link>

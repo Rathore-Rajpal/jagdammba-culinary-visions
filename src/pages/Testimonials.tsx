@@ -65,7 +65,7 @@ const TestimonialsPage = () => {
       event: "Wedding Reception",
       rating: 5,
       image: "👰",
-      quote: "Jagdammba Caterers made our wedding day absolutely perfect! The food was incredible, and every guest complimented the authentic flavors. The service was impeccable, and they handled everything with such professionalism. Highly recommended!",
+      quote: "Jagdamba Caterers made our wedding day absolutely perfect! The food was incredible, and every guest complimented the authentic flavors. The service was impeccable, and they handled everything with such professionalism. Highly recommended!",
       date: "March 2024"
     },
     {
@@ -81,7 +81,7 @@ const TestimonialsPage = () => {
       event: "Birthday Celebration",
       rating: 5,
       image: "👩",
-      quote: "The team at Jagdammba Caterers went above and beyond for my mother's 60th birthday. Every dish was prepared with love and attention to detail. The traditional sweets were absolutely divine. Thank you for making it so special!",
+      quote: "The team at Jagdamba Caterers went above and beyond for my mother's 60th birthday. Every dish was prepared with love and attention to detail. The traditional sweets were absolutely divine. Thank you for making it so special!",
       date: "January 2024"
     },
     {
@@ -89,7 +89,7 @@ const TestimonialsPage = () => {
       event: "Anniversary Party",
       rating: 5,
       image: "👨",
-      quote: "Exceptional quality and service! The food was fresh, delicious, and beautifully presented. The staff was courteous and professional throughout the event. Jagdammba Caterers truly understands the art of hospitality.",
+      quote: "Exceptional quality and service! The food was fresh, delicious, and beautifully presented. The staff was courteous and professional throughout the event. Jagdamba Caterers truly understands the art of hospitality.",
       date: "December 2023"
     },
     {
@@ -97,7 +97,7 @@ const TestimonialsPage = () => {
       event: "Festival Celebration",
       rating: 5,
       image: "👩‍🦱",
-      quote: "We've been using Jagdammba Caterers for our community festivals for years. Their consistency in quality and ability to serve large crowds while maintaining taste is remarkable. They're our go-to caterers!",
+      quote: "We've been using Jagdamba Caterers for our community festivals for years. Their consistency in quality and ability to serve large crowds while maintaining taste is remarkable. They're our go-to caterers!",
       date: "November 2023"
     },
     {
@@ -125,7 +125,7 @@ const TestimonialsPage = () => {
               <span className="block mt-2 font-semibold">स्वादिष्ट यादें, खूबसूरती से परोसी गई।</span>
             </p>
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-              Hear from our satisfied clients about their experiences with Jagdammba Caterers and how we made their events memorable.<br />
+              Hear from our satisfied clients about their experiences with Jagdamba Caterers and how we made their events memorable.<br />
               <span className="text-sm sm:text-base md:text-lg">हमारे संतुष्ट ग्राहकों से जानिए, जिन्होंने जगदम्बा कैटरर्स के साथ अपने खास पलों को यादगार बनाया।</span>
             </p>
           </div>
@@ -256,7 +256,7 @@ const TestimonialsPage = () => {
         <section className="py-12 md:py-16 lg:py-20">
           <div className="container mx-auto px-4 sm:px-6">
             <div className="glass-card p-6 sm:p-8 md:p-12 text-center max-w-3xl mx-auto">
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 md:mb-6">Had an Experience with <span className="text-gradient-gold">Jagdammba Caterers?</span></h2>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 md:mb-6">Had an Experience with <span className="text-gradient-gold">Jagdamba Caterers?</span></h2>
               <p className="text-sm sm:text-base md:text-lg text-muted-foreground mb-4 sm:mb-6 md:mb-8">
                 We'd love to hear about your experience! Your feedback helps us improve and helps other customers make informed decisions.
               </p>
@@ -308,7 +308,7 @@ const TestimonialsPage = () => {
             <DialogDescription className="text-center text-sm sm:text-base text-muted-foreground">
               {reviewType === "review" 
                 ? "Tell us about your experience with our catering services"
-                : "Share how Jagdammba Caterers made your event special"}
+                : "Share how Jagdamba Caterers made your event special"}
             </DialogDescription>
           </DialogHeader>
 

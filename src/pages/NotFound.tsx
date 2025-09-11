@@ -15,7 +15,7 @@ const NotFound = () => {
       <div className="glass-card p-10 text-center max-w-lg mx-auto">
         <img 
           src="/logo.png" 
-          alt="Jagdammba Caterers Logo" 
+          alt="Jagdamba Caterers Logo" 
           className="w-24 h-24 mx-auto mb-6" 
         />
         <h1 className="mb-4 text-5xl font-bold text-gradient-gold">404</h1>
