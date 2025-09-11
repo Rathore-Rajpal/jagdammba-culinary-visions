@@ -138,6 +138,11 @@
   html {
     scroll-behavior: smooth;
   }
+  
+  /* Handwriting font for testimonial polaroids */
+  .font-handwriting {
+    font-family: 'Caveat', 'Kalam', cursive;
+  }
 }
 
 @layer components {
@@ -265,5 +270,90 @@
 
   .bg-glass {
     background: var(--gradient-card);
+  }
+  
+  /* Testimonial page animations and styling */
+  .testimonial-card {
+    transition: all 0.3s ease;
+  }
+  
+  .testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .testimonial-quote {
+    position: relative;
+  }
+  
+  .testimonial-quote::before {
+    content: '"';
+    font-family: serif;
+    font-size: 4rem;
+    position: absolute;
+    top: -1.5rem;
+    left: -1rem;
+    opacity: 0.2;
+    color: var(--primary);
+  }
+  
+  .testimonial-profile {
+    transition: all 0.3s ease;
+  }
+  
+  .testimonial-profile:hover img {
+    transform: scale(1.05);
+  }
+  
+  .stat-card {
+    transition: all 0.3s ease;
+  }
+  
+  .stat-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .animated-bg {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .animated-bg::before,
+  .animated-bg::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: var(--primary);
+    opacity: 0.05;
+    z-index: 0;
+  }
+  
+  .animated-bg::before {
+    top: -100px;
+    left: -100px;
+    animation: pulse 15s infinite alternate;
+  }
+  
+  .animated-bg::after {
+    bottom: -100px;
+    right: -100px;
+    animation: pulse 12s infinite alternate-reverse;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.05;
+    }
+    50% {
+      transform: scale(1.5);
+      opacity: 0.07;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0.05;
+    }
   }
 }

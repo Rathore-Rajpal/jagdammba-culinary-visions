@@ -9,6 +9,7 @@ import About from "./pages/About";
 import Menu from "./pages/Menu";
 import Services from "./pages/Services";
 import Testimonials from "./pages/Testimonials";
+import TestimonialsNew from "./pages/TestimonialsNew";
 import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms from "./pages/Terms";
@@ -29,7 +30,8 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/menu" element={<Menu />} />
           <Route path="/services" element={<Services />} />
-          <Route path="/testimonials" element={<Testimonials />} />
+          <Route path="/testimonials-old" element={<Testimonials />} />
+          <Route path="/testimonials" element={<TestimonialsNew />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
