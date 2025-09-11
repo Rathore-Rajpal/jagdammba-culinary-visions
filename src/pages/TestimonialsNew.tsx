@@ -163,7 +163,7 @@ const TestimonialsNew = () => {
                       </div>
                       
                       {/* Quote Side */}
-                      <div className="w-full md:w-5/12 glass-card p-6 md:p-8">
+                      <div className="w-full md:w-5/12 glass-card p-6 md:p-8" style={{ backgroundColor: 'rgba(210, 230, 255, 0.25)' }}>
                         <div className="mb-5">
                           <Quote className="w-12 h-12 text-primary opacity-60 mb-4" />
                           <p className="text-lg md:text-xl leading-relaxed mb-4">
@@ -225,7 +225,7 @@ const TestimonialsNew = () => {
               <div className="relative group overflow-hidden rounded-lg">
                 <img 
                   src="/testimonials/Gemini_Generated_Image_9mekp09mekp09mek.png" 
-                  alt="Corporate event" 
+                  alt="Grand Engagement Party" 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4">
@@ -237,7 +237,7 @@ const TestimonialsNew = () => {
               <div className="relative group overflow-hidden rounded-lg">
                 <img 
                   src="/testimonials/Gemini_Generated_Image_hqqkwwhqqkwwhqqk.png" 
-                  alt="Wedding celebration" 
+                  alt="Traditional Ceremony" 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4">
@@ -249,12 +249,25 @@ const TestimonialsNew = () => {
               <div className="relative group overflow-hidden rounded-lg">
                 <img 
                   src="/testimonials/Gemini_Generated_Image_nfqw06nfqw06nfqw.png" 
-                  alt="Wedding feast" 
+                  alt="Royal Dining Experience" 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4">
                   <p className="text-white font-medium">Royal Dining Experience</p>
                   <p className="text-sm text-white/80">Jaisalmer</p>
+                </div>
+              </div>
+              
+              {/* Fifth Image (New Addition) */}
+              <div className="relative group overflow-hidden rounded-lg">
+                <img 
+                  src="/testimonials/Gemini_Generated_Image_8gstg68gstg68gst.png" 
+                  alt="Festive Celebration" 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4">
+                  <p className="text-white font-medium">Festive Celebration</p>
+                  <p className="text-sm text-white/80">Bikaner</p>
                 </div>
               </div>
             </div>
