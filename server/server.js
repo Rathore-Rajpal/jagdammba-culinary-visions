@@ -8,9 +8,35 @@ require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// CORS configuration
+const corsOptions = {
+  origin: [
+    'https://jagdammba-culinary-visions.vercel.app',
+    'http://localhost:5173',  // Vite development server
+    'http://localhost:3000'   // Alternative local development port
+  ],
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
 // Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
+
+// Preflight request handler
+app.options('*', cors(corsOptions));
+
+// Test endpoint
+app.get('/api/test', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'API is working correctly',
+    cors: 'enabled',
+    timestamp: new Date().toISOString()
+  });
+});
 
 // Contact form submission endpoint
 app.post('/api/contact', async (req, res) => {

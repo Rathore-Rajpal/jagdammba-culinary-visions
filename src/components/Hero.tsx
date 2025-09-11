@@ -48,7 +48,7 @@ export const Hero = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="tel:+919928649209" className="btn-hero-primary golden-glow group flex items-center justify-center">
+              <a href="tel:+918769480205" className="btn-hero-primary golden-glow group flex items-center justify-center">
                 <Phone className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform animate-pulse" />
                 <span>Book Your Event</span>
               </a>

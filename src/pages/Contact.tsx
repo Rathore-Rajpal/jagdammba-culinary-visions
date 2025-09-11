@@ -5,6 +5,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { useToast } from "@/components/ui/use-toast";
 import { Toaster } from "@/components/ui/toaster";
+import { ReactNode } from "react";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -129,19 +130,31 @@ const ContactPage = () => {
         ? 'http://localhost:5000/api/contact' 
         : 'https://jagdamba-api.onrender.com/api/contact'; // Change this to your production API URL
       
+      console.log("Submitting form to:", apiUrl);
+      
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
+        mode: 'cors',
+        credentials: 'same-origin'
       });
       
-      const result = await response.json();
-      
       if (!response.ok) {
-        throw new Error(result.message || 'Failed to submit the form');
+        const errorText = await response.text();
+        console.error("Server error response:", errorText);
+        
+        try {
+          const result = JSON.parse(errorText);
+          throw new Error(result.message || `Server error: ${response.status}`);
+        } catch (e) {
+          throw new Error(`Server error: ${response.status}. ${errorText || ''}`);
+        }
       }
+      
+      const result = await response.json();
       
       console.log("Form submitted:", result);
       
@@ -171,11 +184,27 @@ const ContactPage = () => {
       }, 5000);
       
     } catch (error: any) {
+      // Handle network errors (like CORS issues)
+      const errorMessage = error.message || "There was an error submitting your request.";
+      const isCorsError = errorMessage.includes("NetworkError") || 
+                          errorMessage.includes("Failed to fetch") || 
+                          error.name === "TypeError";
+      
+      // Show toast with error message
       toast({
         title: "Submission Failed",
-        description: error.message || "There was an error submitting your request. Please try again.",
+        description: isCorsError 
+          ? "Unable to connect to our server. This might be due to network issues or server maintenance. Please contact us directly via phone or email."
+          : errorMessage,
         variant: "destructive"
       });
+      
+      // Show alternative contact methods by setting a state
+      setErrors({
+        ...errors,
+        serverError: "Please use alternative contact methods below while we fix the issue."
+      });
+      
       console.error("Error submitting form:", error);
     } finally {
       setIsSubmitting(false);
@@ -295,6 +324,30 @@ const ContactPage = () => {
                     <div className="bg-green-900/20 border border-green-500/30 text-green-400 px-3 py-2 sm:px-4 sm:py-3 rounded-lg flex items-center mb-4 sm:mb-6 text-xs sm:text-sm">
                       <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 flex-shrink-0" />
                       <span>Your booking request has been sent successfully! We've sent you a confirmation email and will contact you soon.</span>
+                    </div>
+                  )}
+                  
+                  {errors.serverError && (
+                    <div className="bg-amber-900/20 border border-amber-500/30 text-amber-400 px-3 py-2 sm:px-4 sm:py-3 rounded-lg mb-4 sm:mb-6 text-xs sm:text-sm">
+                      <div className="flex items-center mb-2">
+                        <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 flex-shrink-0" />
+                        <span className="font-medium">Server Connection Issue</span>
+                      </div>
+                      <p className="ml-6 mb-2">{errors.serverError}</p>
+                      <div className="ml-6 space-y-1">
+                        <p>
+                          <a href="tel:+918769480205" className="text-amber-400 hover:text-amber-300 underline flex items-center">
+                            <Phone className="w-3 h-3 mr-1" />
+                            Call: +91 87694 80205
+                          </a>
+                        </p>
+                        <p>
+                          <a href="mailto:jagdambacatrers@gmail.com" className="text-amber-400 hover:text-amber-300 underline flex items-center">
+                            <Mail className="w-3 h-3 mr-1" />
+                            Email: jagdambacatrers@gmail.com
+                          </a>
+                        </p>
+                      </div>
                     </div>
                   )}
                   
