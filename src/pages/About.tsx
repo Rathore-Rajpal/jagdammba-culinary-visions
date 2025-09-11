@@ -174,7 +174,7 @@ const AboutPage = () => {
                     </svg>
                   </a>
                   <a 
-                    href="https://www.instagram.com/kr_mahendra_singh_bhati_khardi?igsh=MXVqNWR3M3l2NWNpdA%3D%3D&utm_source=qr" 
+                    href="https://www.instagram.com/jagdamba_caterers_events?igsh=MnhobDNidjBrM3hl&utm_source=qr" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center hover:bg-primary/30 transition-colors"
