@@ -1,7 +1,17 @@
 import { Phone, Mail, MapPin, Clock, MessageCircle } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Footer = () => {
+  const navigate = useNavigate();
+  
+  // Custom navigation function that scrolls to top
+  const navigateTo = (path: string) => {
+    // Scroll to top immediately before navigation
+    window.scrollTo(0, 0);
+    // Navigate to the desired path
+    navigate(path);
+  };
+  
   const quickLinks = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
@@ -14,7 +24,7 @@ export const Footer = () => {
     { icon: Phone, text: "+91 87694 80205", href: "tel:+918769480205" },
     { icon: Mail, text: "jagdambacatrers@gmail.com", href: "mailto:jagdambacatrers@gmail.com" },
     { icon: MapPin, text: "Office 1: 1/1, D.D.P. Nagar, Madhuban Housing Board, Basni, Jodhpur" },
-    { icon: MapPin, text: "Office 2: 1/1, D.D.P. Nagar, Madhuban Housing Board, Basni, Jodhpur" },
+    { icon: MapPin, text: "Office 2: 16/38, D.D.P. Nagar, Madhuban Housing Board, Basni, Jodhpur" },
     { icon: Clock, text: "Mon-Sun: 6:00 AM - 11:00 PM" },
   ];
 
@@ -71,13 +81,13 @@ export const Footer = () => {
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <Link 
-                    to={link.href}
-                    className="text-muted-foreground hover:text-primary transition-colors flex items-center group"
+                  <button 
+                    onClick={() => navigateTo(link.href)}
+                    className="text-muted-foreground hover:text-primary transition-colors flex items-center group cursor-pointer"
                   >
                     <span className="w-0 group-hover:w-2 h-0.5 bg-primary transition-all duration-300 mr-0 group-hover:mr-2"></span>
                     {link.name}
-                  </Link>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -127,9 +137,17 @@ export const Footer = () => {
             © 2024 Jagdamba Caterers and Events. All rights reserved. Serving with ❤️ since 1997.
           </p>
           <div className="flex items-center space-x-4 mt-4 md:mt-0">
-            <Link to="/privacy-policy" className="text-xs md:text-sm text-muted-foreground hover:text-primary transition-colors">Privacy Policy</Link>
+            <button 
+              onClick={() => navigateTo('/privacy-policy')} 
+              className="text-xs md:text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer">
+              Privacy Policy
+            </button>
             <span className="text-muted-foreground">|</span>
-            <Link to="/terms-and-conditions" className="text-xs md:text-sm text-muted-foreground hover:text-primary transition-colors">Terms & Conditions</Link>
+            <button 
+              onClick={() => navigateTo('/terms-and-conditions')} 
+              className="text-xs md:text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer">
+              Terms & Conditions
+            </button>
           </div>
         </div>
       </div>
