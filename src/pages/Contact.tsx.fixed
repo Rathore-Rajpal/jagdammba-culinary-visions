@@ -45,7 +45,7 @@ const ContactPage = () => {
     {
       icon: MapPin,
       title: "Office Address - 2", 
-      details: ["6/38, D.D.P. Nagar, Madhuban Housing Board, Basni, Jodhpur"],
+      details: ["16/38, D.D.P. Nagar, Madhuban Housing Board, Basni, Jodhpur"],
       action: "Get Directions"
     }
   ];

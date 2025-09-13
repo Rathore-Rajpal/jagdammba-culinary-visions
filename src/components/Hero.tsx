@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Phone } from "lucide-react";
+import { Phone, MessageSquare, Instagram, MapPin, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroThali from "@/assets/hero-thali.jpg";
 
@@ -47,14 +47,28 @@ export const Hero = () => {
               शादियाँ, जन्मदिन और हर खास पल – स्वाद जो दिल जीत ले, सेवा जो याद रह जाए।
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col gap-4 items-center">
+              {/* Social media icons in a row */}
+              <div className="flex flex-row gap-3 justify-center">
+                <a href="https://wa.me/918769480205" target="_blank" rel="noopener noreferrer" className="rounded-full bg-primary/10 hover:bg-primary/20 p-3 transition-all" title="WhatsApp">
+                  <MessageSquare className="w-5 h-5 text-primary" />
+                </a>
+                <a href="https://www.instagram.com/jagdamba_caterers_events?igsh=MnhobDNidjBrM3hl&utm_source=qr" target="_blank" rel="noopener noreferrer" className="rounded-full bg-primary/10 hover:bg-primary/20 p-3 transition-all" title="Instagram">
+                  <Instagram className="w-5 h-5 text-primary" />
+                </a>
+                <a href="https://www.google.com/maps/place/Jagdamba+caterers+and+event+management/@26.2283594,73.0210581,17z/data=!3m1!4b1!4m6!3m5!1s0x39418b2aefcf0ec9:0x4036b70674451813!8m2!3d26.2283594!4d73.023633!16s%2Fg%2F11s4x571rl?entry=ttu&g_ep=EgoyMDI1MDkxMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" className="rounded-full bg-primary/10 hover:bg-primary/20 p-3 transition-all" title="Location Map">
+                  <MapPin className="w-5 h-5 text-primary" />
+                </a>
+                <a href="mailto:jagdambacatrers@gmail.com" target="_blank" rel="noopener noreferrer" className="rounded-full bg-primary/10 hover:bg-primary/20 p-3 transition-all" title="Email Us">
+                  <Mail className="w-5 h-5 text-primary" />
+                </a>
+              </div>
+              
+              {/* Book Your Event button on the next line */}
               <a href="tel:+918769480205" className="btn-hero-primary golden-glow group flex items-center justify-center">
-                <Phone className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform animate-pulse" />
+                <Phone className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform animate-pulse text-primary-foreground" />
                 <span>Book Your Event</span>
               </a>
-              <Link to="/menu" className="btn-hero-secondary flex items-center justify-center">
-                <span className="mr-2">📖</span> View Menu
-              </Link>
             </div>
           </div>
 

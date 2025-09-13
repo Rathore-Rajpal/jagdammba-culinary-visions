@@ -25,7 +25,7 @@ export const Footer = () => {
     { icon: Phone, text: "+91 87694 80205", href: "tel:+918769480205" },
     { icon: Mail, text: "jagdambacatrers@gmail.com", href: "mailto:jagdambacatrers@gmail.com" },
     { icon: MapPin, text: "Office 1: 1/1, D.D.P. Nagar, Madhuban Housing Board, Basni, Jodhpur" },
-    { icon: MapPin, text: "Office 2: 16/38, D.D.P. Nagar, Madhuban Housing Board, Basni, Jodhpur" },
+    { icon: MapPin, text: "Office 2: 6/38, D.D.P. Nagar, Madhuban Housing Board, Basni, Jodhpur" },
     { icon: Clock, text: "Mon-Sun: 6:00 AM - 11:00 PM" },
   ];
 
