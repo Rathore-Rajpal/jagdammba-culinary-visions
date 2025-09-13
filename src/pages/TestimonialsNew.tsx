@@ -2,6 +2,7 @@ import { Quote, Star, MessageCircle } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { StoryForm } from "@/components/StoryForm";
 
 // Define testimonial types
 type Testimonial = {
@@ -285,10 +286,7 @@ const TestimonialsNew = () => {
                 Did Jagdamba Caterers create a memorable experience for your special event? 
                 We'd love to hear how our food connected you to cherished memories or created new ones!
               </p>
-              <Button className="btn-hero-primary golden-glow text-lg px-8 py-6 hover:scale-105 transition-transform">
-                <MessageCircle className="w-5 h-5 mr-2" />
-                Tell Us Your Story
-              </Button>
+              <StoryForm />
             </div>
           </div>
         </section>
