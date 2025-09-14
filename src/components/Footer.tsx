@@ -1,5 +1,6 @@
-import { Phone, Mail, MapPin, Clock, MessageCircle } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, MessageCircle, Star } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import { ReviewCTA } from "./ReviewCTA";
 
 export const Footer = () => {
   const navigate = useNavigate();
@@ -124,10 +125,21 @@ export const Footer = () => {
             </p>
             <a 
               href="tel:+918769480205" 
-              className="btn-hero-primary w-full golden-glow inline-flex items-center justify-center"
+              className="btn-hero-primary w-full golden-glow inline-flex items-center justify-center mb-4"
             >
               <Phone className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
               Call to Book Now
+            </a>
+            
+            {/* Google Review Link */}
+            <a 
+              href="https://www.google.com/maps/place/Jagdamba+caterers+and+event+management/@26.2283594,73.0210581,17z/data=!4m8!3m7!1s0x39418b2aefcf0ec9:0x4036b70674451813!8m2!3d26.2283594!4d73.023633!9m1!1b1!16s%2Fg%2F11s4x571rl?entry=ttu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-hero-secondary w-full inline-flex items-center justify-center"
+            >
+              <Star className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-yellow-400" />
+              Rate & Review Us
             </a>
           </div>
         </div>
@@ -137,7 +149,7 @@ export const Footer = () => {
           <p className="text-xs md:text-sm text-muted-foreground text-center md:text-left">
             © 2024 Jagdamba Caterers and Events. All rights reserved. Serving with ❤️ since 1997.
           </p>
-          <div className="flex items-center space-x-4 mt-4 md:mt-0">
+          <div className="flex flex-wrap items-center justify-center md:justify-start space-x-4 mt-4 md:mt-0">
             <button 
               onClick={() => navigateTo('/privacy-policy')} 
               className="text-xs md:text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer">
@@ -149,6 +161,16 @@ export const Footer = () => {
               className="text-xs md:text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer">
               Terms & Conditions
             </button>
+            <span className="text-muted-foreground">|</span>
+            <a 
+              href="https://www.google.com/maps/place/Jagdamba+caterers+and+event+management/@26.2283594,73.0210581,17z/data=!4m8!3m7!1s0x39418b2aefcf0ec9:0x4036b70674451813!8m2!3d26.2283594!4d73.023633!9m1!1b1!16s%2Fg%2F11s4x571rl?entry=ttu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs md:text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer flex items-center"
+            >
+              <Star className="w-3 h-3 mr-1 text-yellow-400" />
+              Write a Review
+            </a>
           </div>
         </div>
       </div>

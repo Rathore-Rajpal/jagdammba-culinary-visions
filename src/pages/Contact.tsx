@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Phone, Mail, MapPin, Clock, MessageCircle, Send, User, Calendar, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, MessageCircle, Send, User, Calendar, CheckCircle, AlertCircle, Loader2, Star } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { useToast } from "@/components/ui/use-toast";
 import { Toaster } from "@/components/ui/toaster";
 import { Helmet } from "react-helmet";
+import { ReviewCTA } from "@/components/ReviewCTA";
 import { ReactNode } from "react";
 
 const ContactPage = () => {
@@ -372,6 +373,29 @@ const ContactPage = () => {
                 <MapPin className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" />
                 Get Directions
               </a>
+            </div>
+          </div>
+        </section>
+        
+        {/* Review CTA Section */}
+        <section className="py-12 md:py-16 lg:py-20 bg-gradient-to-b from-background to-muted/30">
+          <div className="container mx-auto px-4 sm:px-6">
+            <div className="text-center mb-8 sm:mb-10 md:mb-12">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 md:mb-6">Your <span className="text-gradient-gold">Feedback</span> Matters</h2>
+              <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
+                Had a great experience with Jagdamba Caterers? Share your review and help others discover the best catering service in Jodhpur.
+              </p>
+            </div>
+            
+            <div className="max-w-3xl mx-auto">
+              <ReviewCTA variant="full" />
+            </div>
+            
+            <div className="text-center mt-8 sm:mt-10">
+              <p className="text-sm text-muted-foreground">
+                Your reviews help us improve our services and reach more customers in Jodhpur and beyond.
+                <br />Thank you for taking the time to share your experience!
+              </p>
             </div>
           </div>
         </section>

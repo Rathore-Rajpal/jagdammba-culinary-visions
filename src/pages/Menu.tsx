@@ -4,6 +4,7 @@ import { Search, Filter } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Helmet } from "react-helmet";
+import { ReviewCTA } from "@/components/ReviewCTA";
 import { openWhatsAppChat, cn } from "@/lib/utils";
 import sweetsCollection from "@/assets/sweets-collection.jpg";
 import curryDishes from "@/assets/curry-dishes.jpg";
@@ -644,6 +645,24 @@ const MenuPage = () => {
                 Contact for Custom Menu
               </Button>
             </div>
+          </div>
+        </div>
+      </section>
+        
+      {/* Review Section */}
+      <section className="py-12 md:py-16 lg:py-20 bg-gradient-to-b from-background to-muted/30">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="text-center mb-8 sm:mb-10 md:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 md:mb-6">
+              <span className="text-gradient-gold">Loved</span> Our Culinary Creations?
+            </h2>
+            <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
+              Share your dining experience with our catering services and help others discover the best catering in Jodhpur.
+            </p>
+          </div>
+          
+          <div className="max-w-3xl mx-auto">
+            <ReviewCTA variant="full" />
           </div>
         </div>
       </section>

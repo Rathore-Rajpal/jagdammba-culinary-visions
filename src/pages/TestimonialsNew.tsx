@@ -3,6 +3,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { StoryForm } from "@/components/StoryForm";
+import { ReviewCTA } from "@/components/ReviewCTA";
 
 // Define testimonial types
 type Testimonial = {
@@ -287,6 +288,18 @@ const TestimonialsNew = () => {
                 We'd love to hear how our food connected you to cherished memories or created new ones!
               </p>
               <StoryForm />
+            </div>
+          </div>
+        </section>
+
+        {/* Google Review CTA */}
+        <section className="py-16 md:py-20 bg-muted/30">
+          <div className="container mx-auto px-4 sm:px-6">
+            <div className="max-w-2xl mx-auto">
+              <ReviewCTA />
+              <div className="mt-6 text-center text-sm text-muted-foreground">
+                <p>Your reviews help us improve our services and help other clients find the best catering service in Jodhpur!</p>
+              </div>
             </div>
           </div>
         </section>

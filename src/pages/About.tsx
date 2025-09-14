@@ -1,6 +1,7 @@
 import { Users, Clock, Award, Utensils, Heart, Star } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { ReviewCTA } from "@/components/ReviewCTA";
 import chefCooking from "@/assets/chef-cooking.jpg";
 import { Helmet } from "react-helmet";
 import { useEffect } from "react";
@@ -217,6 +218,24 @@ const AboutPage = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Review Section */}
+      <section className="py-12 md:py-16 lg:py-20 bg-gradient-to-b from-background to-muted/30">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="text-center mb-8 sm:mb-10 md:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 md:mb-6">
+              <span className="text-gradient-gold">Share</span> Your Experience
+            </h2>
+            <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
+              We value your feedback! Help others discover the authentic taste of Jagdamba Caterers by sharing your experience.
+            </p>
+          </div>
+          
+          <div className="max-w-3xl mx-auto">
+            <ReviewCTA variant="full" />
           </div>
         </div>
       </section>
