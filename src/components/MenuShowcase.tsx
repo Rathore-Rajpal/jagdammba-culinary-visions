@@ -74,7 +74,7 @@ export const MenuShowcase = () => {
             Our <span className="text-gradient-gold">Signature Menu</span>
           </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Discover our carefully curated selection of authentic dishes, crafted with traditional recipes and premium ingredients.
+            Discover why our wedding catering in Jodhpur is highly sought after. Enjoy our carefully curated selection of authentic Rajasthani dishes, crafted with traditional recipes and premium ingredients.
           </p>
         </div>
 

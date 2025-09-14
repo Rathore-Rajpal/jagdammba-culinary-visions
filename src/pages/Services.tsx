@@ -2,6 +2,8 @@ import { Crown, Users, Calendar, Utensils, Heart, Award, Star, Clock } from "luc
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import { useEffect } from "react";
 import { openWhatsAppChat } from "@/lib/utils";
 
 const ServicesPage = () => {
@@ -111,8 +113,25 @@ const ServicesPage = () => {
     }
   ];
 
+  useEffect(() => {
+    // Update document title for better SEO
+    document.title = "Catering Services in Jodhpur | Wedding & Event Catering | Jagdamba";
+  }, []);
+
   return (
     <>
+      <Helmet>
+        <title>Catering Services in Jodhpur | Wedding & Event Catering | Jagdamba</title>
+        <meta name="description" content="Discover Jagdamba's professional catering services in Jodhpur for weddings, corporate events, birthdays and more. The best wedding catering in Jodhpur since 1997." />
+        <meta name="keywords" content="catering services jodhpur, wedding catering jodhpur, best catering services, event catering, birthday party catering, corporate catering jodhpur" />
+        <link rel="canonical" href="https://www.jagdambacaterersjodhpur.in/services" />
+        
+        {/* Open Graph / Social Media */}
+        <meta property="og:title" content="Catering Services in Jodhpur | Wedding & Event Catering | Jagdamba" />
+        <meta property="og:description" content="Discover Jagdamba's professional catering services in Jodhpur for weddings, corporate events, birthdays and more. The best wedding catering in Jodhpur since 1997." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.jagdambacaterersjodhpur.in/services" />
+      </Helmet>
       <Navbar />
       <div className="min-h-screen bg-background pt-20">
         {/* Hero Section */}
@@ -123,7 +142,7 @@ const ServicesPage = () => {
             </h1>
             <p className="font-hindi text-xl sm:text-2xl md:text-3xl mb-3 sm:mb-4">हमारी सेवाएं</p>
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-              Comprehensive catering solutions for every occasion, combining traditional flavors with professional service excellence.
+              Jodhpur's premier catering services for every occasion, combining traditional Rajasthani flavors with professional excellence. The best wedding catering in Jodhpur since 1997.
             </p>
             <p className="font-hindi text-sm sm:text-base md:text-lg mt-3 sm:mt-4 text-muted-foreground max-w-3xl mx-auto">
               हर अवसर के लिए व्यापक खानपान समाधान, पारंपरिक स्वादों को पेशेवर सेवा उत्कृष्टता के साथ जोड़ते हुए।

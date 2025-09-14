@@ -49,7 +49,7 @@ export const WhyChooseUs = () => {
             Why Choose <span className="text-gradient-gold">Jagdamba?</span>
           </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Experience the difference with our commitment to excellence, authenticity, and unforgettable celebrations.
+            Experience why we're known for the best catering services in Jodhpur with our commitment to excellence, authentic Rajasthani flavors, and unforgettable celebrations.
           </p>
         </div>
 
@@ -82,9 +82,9 @@ export const WhyChooseUs = () => {
 
         <div className="text-center mt-10 md:mt-16">
           <div className="glass-card p-6 md:p-8 max-w-4xl mx-auto">
-            <h3 className="text-xl md:text-2xl font-bold text-gradient-gold mb-3 md:mb-4">Ready to Create Unforgettable Memories?</h3>
+            <h3 className="text-xl md:text-2xl font-bold text-gradient-gold mb-3 md:mb-4">Ready to Experience the Best Catering in Jodhpur?</h3>
             <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6">
-              Let us handle the culinary experience while you enjoy every moment of your special celebration.
+              Let Jodhpur's premier catering service handle the culinary experience while you enjoy every moment of your special celebration.
             </p>
             <Link to="/contact" className="btn-hero-primary golden-glow w-full sm:w-auto inline-flex items-center justify-center">
               Start Planning Your Event

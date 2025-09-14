@@ -41,10 +41,10 @@ export const Hero = () => {
             </h1>
             
             <p className="text-lg sm:text-xl text-muted-foreground mb-4 leading-relaxed px-2">
-              Weddings, Birthdays & Social Events – Taste that Impresses, Service that Delights.
+              Best Catering Services in Jodhpur for Weddings, Birthdays & Social Events – Taste that Impresses, Service that Delights.
             </p>
             <p className="text-lg sm:text-xl text-muted-foreground mb-6 leading-relaxed px-2">
-              शादियाँ, जन्मदिन और हर खास पल – स्वाद जो दिल जीत ले, सेवा जो याद रह जाए।
+              जोधपुर में शादी कैटरिंग, जन्मदिन और हर खास पल – स्वाद जो दिल जीत ले, सेवा जो याद रह जाए।
             </p>
             
             <div className="flex flex-col gap-4 items-center">

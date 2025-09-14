@@ -48,7 +48,7 @@ export const Footer = () => {
               </div>
             </div>
             <p className="text-sm md:text-base text-muted-foreground">
-              Creating delicious memories through authentic flavors and exceptional catering services since 1997.
+              Providing the best catering services in Jodhpur since 1997. Creating delicious memories through authentic Rajasthani flavors and exceptional wedding catering services.
             </p>
             <div className="flex space-x-4">
               <a 

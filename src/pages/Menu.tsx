@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Search, Filter } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { Helmet } from "react-helmet";
 import { openWhatsAppChat, cn } from "@/lib/utils";
 import sweetsCollection from "@/assets/sweets-collection.jpg";
 import curryDishes from "@/assets/curry-dishes.jpg";
@@ -455,8 +456,25 @@ const MenuPage = () => {
     return matchesCategory && matchesSearch;
   });
 
+  useEffect(() => {
+    // Update document title for better SEO
+    document.title = "Our Menu | Best Catering Menu in Jodhpur | Jagdamba Caterers";
+  }, []);
+
   return (
     <>
+      <Helmet>
+        <title>Our Menu | Best Catering Menu in Jodhpur | Jagdamba Caterers</title>
+        <meta name="description" content="Explore Jagdamba Caterers' extensive menu offering authentic Rajasthani cuisine. The best wedding catering menu in Jodhpur with traditional sweets, royal vegetables and more." />
+        <meta name="keywords" content="catering menu jodhpur, wedding catering menu, best food catering jodhpur, jagdamba menu, rajasthani catering menu" />
+        <link rel="canonical" href="https://www.jagdambacaterersjodhpur.in/menu" />
+        
+        {/* Open Graph / Social Media */}
+        <meta property="og:title" content="Our Menu | Best Catering Menu in Jodhpur | Jagdamba Caterers" />
+        <meta property="og:description" content="Explore Jagdamba Caterers' extensive menu offering authentic Rajasthani cuisine. The best wedding catering menu in Jodhpur with traditional sweets, royal vegetables and more." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.jagdambacaterersjodhpur.in/menu" />
+      </Helmet>
       <Navbar />
       <div className="min-h-screen bg-background pt-20">
       {/* Hero Section */}
@@ -467,8 +485,8 @@ const MenuPage = () => {
           </h1>
           <p className="font-hindi text-xl sm:text-2xl md:text-3xl mb-3 sm:mb-4">जगदम्बा का विशेष मेनू</p>
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-            Explore our authentic collection of traditional dishes, featuring sweets, royal vegetables, 
-            breakfast items, snacks and more - all carefully prepared with premium ingredients.
+            Experience the best catering menu in Jodhpur with our authentic collection of traditional Rajasthani dishes, 
+            featuring premium sweets, royal vegetables, breakfast items, snacks and more - perfect for weddings and special events.
           </p>
         </div>
       </section>

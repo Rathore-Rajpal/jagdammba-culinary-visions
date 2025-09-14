@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Phone, Mail, MapPin, Clock, MessageCircle, Send, User, Calendar, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { useToast } from "@/components/ui/use-toast";
 import { Toaster } from "@/components/ui/toaster";
+import { Helmet } from "react-helmet";
 import { ReactNode } from "react";
 
 const ContactPage = () => {
@@ -211,8 +212,25 @@ const ContactPage = () => {
     }
   };
 
+  useEffect(() => {
+    // Update document title for better SEO
+    document.title = "Contact Jagdamba Caterers | Best Catering in Jodhpur";
+  }, []);
+
   return (
     <>
+      <Helmet>
+        <title>Contact Jagdamba Caterers | Best Catering in Jodhpur</title>
+        <meta name="description" content="Contact Jagdamba Caterers for the best wedding catering services in Jodhpur. Get personalized quotes for your events, corporate functions, and celebrations." />
+        <meta name="keywords" content="contact jagdamba caterers, jodhpur catering contact, wedding caterer contact, best catering services jodhpur contact, event catering jodhpur" />
+        <link rel="canonical" href="https://www.jagdambacaterersjodhpur.in/contact" />
+        
+        {/* Open Graph / Social Media */}
+        <meta property="og:title" content="Contact Jagdamba Caterers | Best Catering in Jodhpur" />
+        <meta property="og:description" content="Contact Jagdamba Caterers for the best wedding catering services in Jodhpur. Get personalized quotes for your events, corporate functions, and celebrations." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.jagdambacaterersjodhpur.in/contact" />
+      </Helmet>
       <Navbar />
       <div className="min-h-screen bg-background pt-20">
         {/* Hero Section */}
@@ -222,7 +240,7 @@ const ContactPage = () => {
               Contact <span className="text-gradient-gold">Jagdamba Caterers</span>
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-              Ready to plan your perfect event? Get in touch with us for personalized consultation and competitive quotes.
+              Ready to plan your perfect event with the best catering services in Jodhpur? Get in touch with us for personalized consultation and competitive quotes for wedding catering and special events.
             </p>
           </div>
         </section>

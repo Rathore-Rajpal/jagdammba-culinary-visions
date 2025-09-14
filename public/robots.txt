@@ -12,3 +12,18 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+# Sitemap URL
+Sitemap: https://www.jagdambacaterersjodhpur.in/sitemap.xml
+
+# Disallow unnecessary routes or admin pages
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /api/
+
+# Allow important routes for SEO
+Allow: /about
+Allow: /menu
+Allow: /services
+Allow: /testimonials
+Allow: /contact

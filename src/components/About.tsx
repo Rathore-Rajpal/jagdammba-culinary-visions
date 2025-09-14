@@ -24,11 +24,11 @@ export const About = () => {
             </div>
             
             <p className="text-base md:text-lg text-muted-foreground mb-6 md:mb-8 leading-relaxed">
-              Jagdamba Caterers and Events brings you the authentic taste of Jodhpur, professional catering, and flawless event management since 1997. With decades of expertise, we make your celebrations in the Blue City truly unforgettable.
+              Jagdamba Caterers and Events offers the best catering services in Jodhpur, providing authentic flavors, professional catering, and flawless event management since 1997. With decades of expertise, we make your celebrations in the Blue City truly unforgettable.
             </p>
             
             <p className="text-base md:text-lg text-muted-foreground mb-6 md:mb-8 leading-relaxed">
-              From intimate family gatherings to grand wedding celebrations, we craft culinary experiences that blend Jodhpur's rich traditional flavors with modern presentation, ensuring every dish tells a story of love, heritage, and taste.
+              From intimate family gatherings to premier wedding catering in Jodhpur, we craft culinary experiences that blend Rajasthan's rich traditional flavors with modern presentation, ensuring every dish tells a story of love, heritage, and taste.
             </p>
 
             {/* Stats Grid - More responsive with smaller padding on mobile */}

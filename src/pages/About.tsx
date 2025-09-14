@@ -2,6 +2,8 @@ import { Users, Clock, Award, Utensils, Heart, Star } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import chefCooking from "@/assets/chef-cooking.jpg";
+import { Helmet } from "react-helmet";
+import { useEffect } from "react";
 
 const AboutPage = () => {
   const stats = [
@@ -29,8 +31,25 @@ const AboutPage = () => {
     }
   ];
 
+  useEffect(() => {
+    // Update document title for better SEO
+    document.title = "About Jagdamba Caterers | Best Catering Service in Jodhpur";
+  }, []);
+
   return (
     <>
+      <Helmet>
+        <title>About Jagdamba Caterers | Best Catering Service in Jodhpur</title>
+        <meta name="description" content="Learn about Jagdamba Caterers - Jodhpur's premier catering service since 1997. With 25+ years of experience, we provide authentic Rajasthani cuisine for weddings and events." />
+        <meta name="keywords" content="about jagdamba caterers, best catering services jodhpur, wedding catering jodhpur, catering experience, professional caterer jodhpur" />
+        <link rel="canonical" href="https://www.jagdambacaterersjodhpur.in/about" />
+        
+        {/* Open Graph / Social Media */}
+        <meta property="og:title" content="About Jagdamba Caterers | Best Catering Service in Jodhpur" />
+        <meta property="og:description" content="Learn about Jagdamba Caterers - Jodhpur's premier catering service since 1997. With 25+ years of experience, we provide authentic Rajasthani cuisine for weddings and events." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.jagdambacaterersjodhpur.in/about" />
+      </Helmet>
       <Navbar />
       <div className="min-h-screen bg-background pt-20">
       {/* Hero Section */}
