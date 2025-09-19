@@ -226,19 +226,22 @@ export const StoryForm = () => {
                 className="hidden"
                 onChange={handleFileChange}
               />
-              <div className="flex gap-3">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <Button
                   type="button"
                   variant="outline"
                   onClick={triggerFileInput}
-                  className="flex-1"
+                  className="sm:flex-1"
                 >
                   <Upload className="w-4 h-4 mr-2" />
                   Choose Photo
                 </Button>
+                {/* File name on its own line on small screens; truncated to avoid expanding the form */}
                 {fileName && (
-                  <div className="flex-1 truncate py-2 px-3 bg-muted/20 rounded-md text-sm">
-                    {fileName}
+                  <div className="w-full sm:w-auto truncate py-2 px-3 bg-muted/20 rounded-md text-sm break-words">
+                    <span className="inline-block max-w-full align-middle" aria-hidden>
+                      {fileName}
+                    </span>
                   </div>
                 )}
               </div>
