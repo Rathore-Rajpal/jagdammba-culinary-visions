@@ -4,6 +4,7 @@ import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { StoryForm } from "@/components/StoryForm";
 import { ReviewCTA } from "@/components/ReviewCTA";
+import { LatestReviewsSlideshow } from "@/components/LatestReviewsSlideshow";
 
 // Define testimonial types
 type Testimonial = {
@@ -99,6 +100,8 @@ const TestimonialsNew = () => {
           </div>
         </section>
 
+
+
         {/* Testimonials Section - Vertical Layout */}
         <section className="py-16 md:py-24 bg-muted/10">
           <div className="container mx-auto px-4 sm:px-6">
@@ -110,7 +113,6 @@ const TestimonialsNew = () => {
                 Real experiences from our clients who have enjoyed our authentic culinary traditions
               </p>
             </div>
-            
             <div className="max-w-6xl mx-auto">
               {/* Vertical Layout with Alternating Testimonials */}
               <div className="relative space-y-32">
@@ -131,7 +133,6 @@ const TestimonialsNew = () => {
                             <p className="font-handwriting text-lg">{testimonial.foodItem || "Traditional Cuisine"}</p>
                           </div>
                         </div>
-                        
                         {/* Arrow Image - Only for first and third testimonial */}
                         {(testimonial.id === 0 || testimonial.id === 2) && (
                           <img 
@@ -144,7 +145,6 @@ const TestimonialsNew = () => {
                             } -translate-y-1/2 w-24 h-auto z-10 opacity-90`}
                           />
                         )}
-                        
                         {/* Special arrow for second testimonial */}
                         {testimonial.id === 1 && (
                           <img 
@@ -153,7 +153,6 @@ const TestimonialsNew = () => {
                             className="hidden md:block absolute top-1/2 right-full mr-2 -translate-y-1/2 w-24 h-auto z-10 opacity-90 -scale-x-100"
                           />
                         )}
-                        
                         {/* Special arrow for last testimonial */}
                         {testimonial.id === 3 && (
                           <img 
@@ -163,7 +162,6 @@ const TestimonialsNew = () => {
                           />
                         )}
                       </div>
-                      
                       {/* Quote Side */}
                       <div className="w-full md:w-5/12 glass-card p-6 md:p-8" style={{ backgroundColor: 'rgba(210, 230, 255, 0.25)' }}>
                         <div className="mb-5">
@@ -171,7 +169,6 @@ const TestimonialsNew = () => {
                           <p className="text-lg md:text-xl leading-relaxed mb-4">
                             "{testimonial.quote}"
                           </p>
-                          
                           {/* Customer Info */}
                           <div className="pt-4 border-t border-primary/20">
                             <h3 className="text-xl font-bold text-gradient-gold mb-1">{testimonial.customerName}</h3>
@@ -180,7 +177,6 @@ const TestimonialsNew = () => {
                             </p>
                           </div>
                         </div>
-                        
                         {/* Rating */}
                         <div className="flex mt-4">
                           {[...Array(5)].map((_, i) => (
@@ -276,6 +272,17 @@ const TestimonialsNew = () => {
           </div>
         </section>
         
+        {/* Latest Reviews Slideshow above the form */}
+        <section className="py-14 md:py-20 bg-hero overflow-hidden relative">
+          <div className="absolute inset-0 opacity-30 pointer-events-none">
+            <div className="float-animation absolute top-20 right-20 w-16 h-16 bg-gradient-to-br from-primary/50 to-accent/60 rounded-full blur-2xl"></div>
+            <div className="float-animation absolute bottom-20 left-40 w-12 h-12 border-2 border-accent/30 rounded-full" style={{ animationDelay: '1.2s' }}></div>
+          </div>
+          <div className="container mx-auto px-4 sm:px-6">
+            <LatestReviewsSlideshow />
+          </div>
+        </section>
+
         {/* Share Your Story CTA */}
         <section className="py-16 md:py-24">
           <div className="container mx-auto px-4 sm:px-6">

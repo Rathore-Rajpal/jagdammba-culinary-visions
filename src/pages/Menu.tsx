@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { Helmet } from "react-helmet";
 import { ReviewCTA } from "@/components/ReviewCTA";
 import { openWhatsAppChat, cn } from "@/lib/utils";
+import { supabase } from "@/lib/supabaseClient";
 import sweetsCollection from "@/assets/sweets-collection.jpg";
 import curryDishes from "@/assets/curry-dishes.jpg";
 import heroThali from "@/assets/hero-thali.jpg";
@@ -219,6 +220,9 @@ const getMenuItemImagePath = (itemName: string, hindiName?: string) => {
 const MenuPage = () => {
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
+  const [menuItems, setMenuItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   
   // Helper function to get appropriate image based on category
   const getCategoryImage = (category: string) => {
@@ -244,6 +248,43 @@ const MenuPage = () => {
     }
   };
 
+  // Fetch menu items from Supabase
+  useEffect(() => {
+    const fetchMenuItems = async () => {
+      try {
+        setIsLoading(true);
+        const { data, error } = await supabase
+          .from('menu_items')
+          .select('*');
+        
+        if (error) {
+          console.error('Error fetching menu items:', error);
+          setError(error.message);
+          setIsLoading(false);
+          return;
+        }
+        
+        // Map the data to include the appropriate image based on category
+        const mappedData = data.map(item => ({
+          ...item,
+          name: item.english_name,
+          hindiName: item.hindi_name,
+          description: item.description || '',
+          image: getCategoryImage(item.category)
+        }));
+        
+        setMenuItems(mappedData);
+        setIsLoading(false);
+      } catch (err) {
+        console.error('Error in fetchMenuItems:', err);
+        setError(err.message);
+        setIsLoading(false);
+      }
+    };
+
+    fetchMenuItems();
+  }, []);
+
   const categories = [
     { id: "all", name: "All Items", hindiName: "सभी आइटम", emoji: "🍽️" },
     { id: "sweets", name: "Sweets", hindiName: "मिठाई", emoji: "🍯" },
@@ -256,204 +297,14 @@ const MenuPage = () => {
     { id: "rice", name: "Rice", hindiName: "चावल", emoji: "🍚" },
   ];
 
-  // Complete menu based on provided categories
-  const menuItems = [
-    // Sweets Category - First Group
-    { name: "Lapsi", hindiName: "लाप्सी", category: "sweets", description: "Traditional sweet made from broken wheat", image: sweetsCollection },
-    { name: "Dal Badam Halwa", hindiName: "दाल बादाम हलवा", category: "sweets", description: "Rich almond and lentil halwa", image: sweetsCollection },
-    { name: "Kaju Akhrot Halwa", hindiName: "काजू अखरोट हलवा", category: "sweets", description: "Premium cashew and walnut halwa", image: sweetsCollection },
-    { name: "Anjir Katli", hindiName: "अंजीर कतली", category: "sweets", description: "Fig-based sweet delicacy", image: sweetsCollection },
-    { name: "Kaju Roll", hindiName: "काजू रोल", category: "sweets", description: "Rolled cashew sweets", image: sweetsCollection },
-    { name: "Pista Roll", hindiName: "पिस्ता रोल", category: "sweets", description: "Pistachio rolled sweets", image: sweetsCollection },
-    { name: "Butter Scotch Halwa", hindiName: "बटर स्कॉच हलवा", category: "sweets", description: "Butterscotch flavored halwa", image: sweetsCollection },
-    { name: "Panchmewa Chakki", hindiName: "पंचमेवा चक्की", category: "sweets", description: "Five-nut mixed sweet", image: sweetsCollection },
-    { name: "Rabdi Malpua", hindiName: "रबड़ी मालपुआ", category: "sweets", description: "Sweet pancakes with rabdi", image: sweetsCollection },
-    { name: "Mawa Barfi", hindiName: "मावा बर्फी", category: "sweets", description: "Milk solid based barfi", image: sweetsCollection },
-    { name: "Milk Cake", hindiName: "मिल्क केक", category: "sweets", description: "Soft milk-based cake", image: sweetsCollection },
-    { name: "Atta Malpua", hindiName: "आटा मालपुआ", category: "sweets", description: "Wheat flour pancakes in syrup", image: sweetsCollection },
-    { name: "Gulab Jamun", hindiName: "गुलाब जामुन", category: "sweets", description: "Soft milk dumplings in syrup", image: sweetsCollection },
-    { name: "Cutting Gulab Jamun", hindiName: "कटिंग गुलाब जामुन", category: "sweets", description: "Layered gulab jamun variety", image: sweetsCollection },
-    { name: "Kaju Pista Roll", hindiName: "काजू पिस्ता रोल", category: "sweets", description: "Cashew pistachio rolls", image: sweetsCollection },
-    { name: "Gajar Halwa", hindiName: "गाजर हलवा", category: "sweets", description: "Carrot-based halwa", image: sweetsCollection },
-    { name: "Bundi", hindiName: "बुन्दी", category: "sweets", description: "Small sweet pearls made from gram flour", image: sweetsCollection },
-    { name: "Besan Chakki", hindiName: "बेसन चक्की", category: "sweets", description: "Gram flour-based sweet", image: sweetsCollection },
-    { name: "Dal Badam Chakki", hindiName: "दाल बादाम चक्की", category: "sweets", description: "Lentil and almond sweet", image: sweetsCollection },
-    { name: "Motipak Chakki", hindiName: "मोतीपाक चक्की", category: "sweets", description: "Pearl-like sweet preparation", image: sweetsCollection },
-    { name: "Balushahi", hindiName: "बालूशाही", category: "sweets", description: "Flaky, glazed donut-like sweet", image: sweetsCollection },
-    { name: "Guniya", hindiName: "गुनिया", category: "sweets", description: "Sweet stuffed pastry", image: sweetsCollection },
-    { name: "Rabdi Ghewar", hindiName: "रबड़ी घेवर", category: "sweets", description: "Disc-shaped sweet topped with rabdi", image: sweetsCollection },
-    { name: "Sada Ghewar", hindiName: "सादा घेवर", category: "sweets", description: "Plain disc-shaped sweet", image: sweetsCollection },
-    { name: "Churma Laddu", hindiName: "चूरमा लड्डू", category: "sweets", description: "Special variety of laddu", image: sweetsCollection },
-    { name: "Bundi Laddu", hindiName: "बूंदी लड्डू", category: "sweets", description: "Gram flour pearls laddu", image: sweetsCollection },
-    
-    // Sweets Category - Second Group
-    { name: "Fruit Cream", hindiName: "फ्रूट क्रीम", category: "sweets", description: "Fresh fruit with cream", image: sweetsCollection },
-    { name: "Sponge Rasgulla", hindiName: "स्पन्ज रसगुला", category: "sweets", description: "Soft spongy cheese balls in syrup", image: sweetsCollection },
-    { name: "Kesar Rajbhog", hindiName: "केशर राजभोग", category: "sweets", description: "Saffron flavored rajbhog", image: sweetsCollection },
-    { name: "Malai Rajbhog", hindiName: "मलाई राजभोग", category: "sweets", description: "Cream-filled rajbhog", image: sweetsCollection },
-    { name: "Chamcham", hindiName: "चमचम", category: "sweets", description: "Bengali sweet delicacy", image: sweetsCollection },
-    { name: "Kesar Chamcham", hindiName: "केशर चमचम", category: "sweets", description: "Saffron chamcham", image: sweetsCollection },
-    { name: "Ras Malai", hindiName: "रस मलाई", category: "sweets", description: "Soft cheese patties in sweet milk", image: sweetsCollection },
-    { name: "Ras Madhuri", hindiName: "रस माधुरी", category: "sweets", description: "Sweet cheese balls in flavored milk", image: sweetsCollection },
-    { name: "Chhena Roll", hindiName: "छैना रोल", category: "sweets", description: "Cottage cheese rolls", image: sweetsCollection },
-    { name: "Chhena Toast", hindiName: "छैना टोस्ट", category: "sweets", description: "Grilled cottage cheese sweet", image: sweetsCollection },
-    { name: "Khurbani", hindiName: "खुर्बानी", category: "sweets", description: "Sweet apricot preparation", image: sweetsCollection },
-    { name: "Kheer Chamcham", hindiName: "खीर चमचम", category: "sweets", description: "Kheer-filled chamcham", image: sweetsCollection },
-    { name: "Kesar Bati", hindiName: "केशर बाटी", category: "sweets", description: "Saffron bati", image: sweetsCollection },
-    { name: "Khajur Pak", hindiName: "खजूर पाक", category: "sweets", description: "Date-based sweet", image: sweetsCollection },
-    { name: "Kaju Kesarpak", hindiName: "काजू केसरपाक", category: "sweets", description: "Cashew saffron pak", image: sweetsCollection },
-    { name: "Gulkand Barfi", hindiName: "गुलकन्द बर्फी", category: "sweets", description: "Rose petal barfi", image: sweetsCollection },
-    { name: "Sangam Dryfruit", hindiName: "संगम ड्राईफ्रूट", category: "sweets", description: "Mixed dry fruit sweet", image: sweetsCollection },
-    { name: "Anjir Patasha", hindiName: "अंजीर पताशा", category: "sweets", description: "Fig-based patasha", image: sweetsCollection },
-    { name: "Imarti", hindiName: "इमरती", category: "sweets", description: "Traditional spiral sweet", image: sweetsCollection },
-    { name: "Jalebi", hindiName: "जलेबी", category: "sweets", description: "Crispy spiral in syrup", image: sweetsCollection },
-    { name: "Motichur Laddu", hindiName: "मोतीचूर लड्डू", category: "sweets", description: "Fine gram flour balls laddu", image: sweetsCollection },
-    { name: "Gur Pak", hindiName: "गुल पाक", category: "sweets", description: "Jaggery-based sweet", image: sweetsCollection },
-    { name: "Tiranga Halwa", hindiName: "तिरंगा हलवा", category: "sweets", description: "Three-colored halwa", image: sweetsCollection },
-    { name: "Mirchi Chutney", hindiName: "मिर्ची चटनी", category: "sweets", description: "Sweet chili chutney", image: sweetsCollection },
-
-    // Royal Vegetables Category - First Group
-    { name: "Shahi Paneer", hindiName: "शाही पनीर", category: "vegetables", description: "Royal cottage cheese curry", image: curryDishes },
-    { name: "Matar Paneer", hindiName: "मटर पनीर", category: "vegetables", description: "Peas and cottage cheese", image: curryDishes },
-    { name: "Palak Paneer", hindiName: "पालक पनीर", category: "vegetables", description: "Spinach cottage cheese", image: curryDishes },
-    { name: "Haldi Matar", hindiName: "हल्दी मटर", category: "vegetables", description: "Turmeric flavored peas", image: curryDishes },
-    { name: "Gulabjamun Sabji", hindiName: "गुलाबजामुन सब्जी", category: "vegetables", description: "Special savory preparation", image: curryDishes },
-    { name: "Govind Gatta", hindiName: "गोविन्द गट्टा", category: "vegetables", description: "Gram flour dumplings", image: curryDishes },
-    { name: "Chakki Sabji", hindiName: "चक्की सब्जी", category: "vegetables", description: "Mixed vegetable preparation", image: curryDishes },
-    { name: "Mix Veg", hindiName: "मिक्स वेज", category: "vegetables", description: "Mixed vegetable medley", image: curryDishes },
-    { name: "Gobhi Tamatar Matar", hindiName: "गोभी टमाटर मटर", category: "vegetables", description: "Cauliflower with tomatoes and peas", image: curryDishes },
-    { name: "Bhindi Shimla Mirchi Fry", hindiName: "भिंडी शिमला मिर्ची फ्राई", category: "vegetables", description: "Okra and bell pepper fry", image: curryDishes },
-    { name: "Malai Pyaj Sabji", hindiName: "मलाई प्याज सब्जी", category: "vegetables", description: "Creamy onion curry", image: curryDishes },
-    { name: "Lahsun Chutney", hindiName: "लहसुन चटनी", category: "vegetables", description: "Garlic chutney", image: curryDishes },
-    { name: "Mewa Mung Dal Moger", hindiName: "मेवा मूंग दाल मोगर", category: "vegetables", description: "Dry fruit with mung dal preparation", image: curryDishes },
-    { name: "Kaju Kari Sabji", hindiName: "काजू करी सब्जी", category: "vegetables", description: "Cashew curry", image: curryDishes },
-    { name: "Pankaj Kutta Sabji", hindiName: "पंकज कट्टा सब्जी", category: "vegetables", description: "Special vegetable preparation", image: curryDishes },
-    { name: "Gajar Muli Achar", hindiName: "गाजर मूली अचार", category: "vegetables", description: "Carrot radish pickle", image: curryDishes },
-    { name: "Mirchi Kuta", hindiName: "मिर्ची कुटा", category: "vegetables", description: "Crushed chili preparation", image: curryDishes },
-    { name: "Keri Gunda", hindiName: "केरी गुन्दा", category: "vegetables", description: "Mango gunda preparation", image: curryDishes },
-    { name: "Dal Fry", hindiName: "दाल फ्राई", category: "vegetables", description: "Fried lentils", image: curryDishes },
-    { name: "Dal Makhani", hindiName: "दाल मक्खनी", category: "vegetables", description: "Creamy black lentils", image: curryDishes },
-    { name: "Sambhar Dal", hindiName: "सांभर दाल", category: "vegetables", description: "South Indian lentil preparation", image: curryDishes },
-    { name: "Navratna Korma Sabji", hindiName: "नवरत्न कोरमा सब्जी", category: "vegetables", description: "Nine-gem vegetable korma", image: curryDishes },
-    { name: "Mirchi Chutney", hindiName: "मिर्ची चटनी", category: "vegetables", description: "Chili chutney", image: curryDishes },
-    { name: "Paneer Shimla Sabji", hindiName: "पनीर शिमला सब्जी", category: "vegetables", description: "Paneer bell pepper curry", image: curryDishes },
-    { name: "Malai Kofta", hindiName: "मलाई कोफ्ता", category: "vegetables", description: "Creamy cottage cheese balls", image: curryDishes },
-    { name: "Palak Maksum", hindiName: "पालक माक्सम", category: "vegetables", description: "Spinach special preparation", image: curryDishes },
-    { name: "Aalu Gobhi", hindiName: "आलू गोभी", category: "vegetables", description: "Potato cauliflower", image: curryDishes },
-    { name: "Dum Aalu", hindiName: "दम आलू", category: "vegetables", description: "Slow-cooked potatoes", image: curryDishes },
-
-    // Royal Vegetables Category - Second Group
-  { name: "Sarso ka Saag", hindiName: "सरसो का साग", category: "vegetables", description: "Mustard greens preparation", image: curryDishes },
-  { name: "Tawa Sabji", hindiName: "तवा सब्जी", category: "vegetables", description: "Griddle-cooked vegetables", image: curryDishes },
-  { name: "Shahi Raita", hindiName: "शाही रायता", category: "vegetables", description: "Royal yogurt preparation", image: curryDishes },
-  { name: "Sev Tamatar", hindiName: "सेव टमाटर", category: "vegetables", description: "Tomato with crispy sev", image: curryDishes },
-  { name: "Bhindi Masala", hindiName: "भिंडी मसाला", category: "vegetables", description: "Spiced okra preparation", image: curryDishes },
-  { name: "Besan Mirchi", hindiName: "बेसन मिर्ची", category: "vegetables", description: "Gram flour coated chilies", image: curryDishes },
-  { name: "Safed Kadhi", hindiName: "सफेद कढ़ी", category: "vegetables", description: "White yogurt curry", image: curryDishes },
-  { name: "Palak Kadhi", hindiName: "पालक कढ़ी", category: "vegetables", description: "Spinach yogurt curry", image: curryDishes },
-  { name: "Masala Kadhi", hindiName: "मसाला कढ़ी", category: "vegetables", description: "Spiced yogurt curry", image: curryDishes },
-  { name: "Vegetable Raita", hindiName: "वेजीटेबल रायता", category: "vegetables", description: "Mixed vegetable yogurt", image: curryDishes },
-
-    // Salty Snacks Category
-    { name: "Mewa Hoya Moger", hindiName: "मेवा होया मोगर", category: "snacks", description: "Dry fruit based special snack", image: snacksImage },
-    { name: "Mewa Madhur", hindiName: "मेवा मधुर", category: "snacks", description: "Sweet and savory dry fruit mix", image: snacksImage },
-    { name: "Dal Moth", hindiName: "दाल मोठ", category: "snacks", description: "Lentil-based snack", image: snacksImage },
-    { name: "Mix Namkeen", hindiName: "मिक्स नमकीन", category: "snacks", description: "Assorted savory mix", image: snacksImage },
-    { name: "Ratalami Sev", hindiName: "रतालामी सेव", category: "snacks", description: "Ratlam-style sev", image: snacksImage },
-    { name: "Navratna Mixer", hindiName: "नवरत्न मिक्सर", category: "snacks", description: "Nine-ingredient snack mix", image: snacksImage },
-    { name: "Bhavnagari Gathia", hindiName: "भाव नगरी गाठिया", category: "snacks", description: "Bhavnagar-style gathia", image: snacksImage },
-    { name: "Aalu Papdi", hindiName: "आलू पापड़ी", category: "snacks", description: "Potato wafers", image: snacksImage },
-    { name: "Barik Sev", hindiName: "बारीक सेव", category: "snacks", description: "Fine gram flour noodles", image: snacksImage },
-    { name: "Lahrun Gathia", hindiName: "लहरुन गाठिया", category: "snacks", description: "Garlic flavored gathia", image: snacksImage },
-    { name: "Jhakas Papad", hindiName: "झकास पापड़", category: "snacks", description: "Special spiced papadum", image: snacksImage },
-    { name: "Kotari Papad", hindiName: "कोतरी पापड़", category: "snacks", description: "Traditional papadum variety", image: snacksImage },
-    { name: "Khichia", hindiName: "खिचिया", category: "snacks", description: "Rice flour crackers", image: snacksImage },
-    { name: "Salewada Phali", hindiName: "सलेवड़ा फली", category: "snacks", description: "Salted beans snack", image: snacksImage },
-
-    // Breakfast Category
-    { name: "Jalebi Imarti", hindiName: "जलेबी इमरती", category: "breakfast", description: "Sweet spiral treats", image: curryDishes },
-    { name: "Idli", hindiName: "इडली", category: "breakfast", description: "Steamed rice cakes", image: curryDishes },
-    { name: "Sambhar", hindiName: "सांभर", category: "breakfast", description: "Lentil vegetable stew", image: curryDishes },
-    { name: "Bada", hindiName: "बड़ा", category: "breakfast", description: "Lentil fritters", image: curryDishes },
-    { name: "Nariyal Chutney", hindiName: "नारियल चटनी", category: "breakfast", description: "Coconut chutney", image: curryDishes },
-    { name: "Hari Chutney", hindiName: "हरी चटनी", category: "breakfast", description: "Green chutney", image: curryDishes },
-    { name: "Chaman", hindiName: "छमन", category: "breakfast", description: "Kashmiri paneer dish", image: curryDishes },
-    { name: "Poha", hindiName: "पोहा", category: "breakfast", description: "Flattened rice dish", image: curryDishes },
-    { name: "Upma", hindiName: "उपमा", category: "breakfast", description: "Semolina savory porridge", image: curryDishes },
-    { name: "Mung Dal Moger Kachori", hindiName: "मूंग दाल मोगर कचोरी", category: "breakfast", description: "Mung dal stuffed fried pastry", image: curryDishes },
-    { name: "Pyaz Kachori", hindiName: "प्याज़ कचोरी", category: "breakfast", description: "Onion stuffed kachori", image: curryDishes },
-    { name: "Mirchi Vada", hindiName: "मिर्ची वड़ा", category: "breakfast", description: "Stuffed chili fritters", image: curryDishes },
-    { name: "Kachori", hindiName: "कचोरी", category: "breakfast", description: "Spiced stuffed pastry", image: curryDishes },
-    { name: "Bread Pakoda", hindiName: "ब्रेड पकौड़ा", category: "breakfast", description: "Bread fritters", image: curryDishes },
-    { name: "Paneer Pakoda", hindiName: "पनीर पकौड़ा", category: "breakfast", description: "Cottage cheese fritters", image: curryDishes },
-    { name: "Mix Pakoda", hindiName: "मिक्स पकौड़ा", category: "breakfast", description: "Assorted vegetable fritters", image: curryDishes },
-    { name: "Kesar Puri", hindiName: "केशर पूर", category: "breakfast", description: "Saffron flavored fried bread", image: curryDishes },
-    { name: "Coffee", hindiName: "कॉफी", category: "breakfast", description: "Indian tea/Coffee", image: curryDishes },
-
-    // Stall Items Category
-    { name: "Tandoori Roti", hindiName: "तंदूरी रोटी", category: "stall", description: "Clay oven baked flatbread", image: stallItemsImage },
-    { name: "Roti", hindiName: "रोटी", category: "stall", description: "Traditional flatbread", image: stallItemsImage },
-    { name: "Khai Sans", hindiName: "खाई साँस", category: "stall", description: "Special savory snack", image: stallItemsImage },
-    { name: "Chowmein", hindiName: "चाऊमीन", category: "stall", description: "Stir-fried noodles", image: stallItemsImage },
-    { name: "Pani Patasa", hindiName: "पानी पटासा", category: "stall", description: "Pani puri/Golgappa", image: stallItemsImage },
-    { name: "Fruit Chaat", hindiName: "फ्रूट चाट", category: "stall", description: "Spiced fruit salad", image: stallItemsImage },
-    { name: "Manchurian", hindiName: "मंचूरियन", category: "stall", description: "Indo-Chinese vegetable balls", image: stallItemsImage },
-    { name: "Pav Bhaji", hindiName: "पाव भाजी", category: "stall", description: "Spiced vegetable mash with bread", image: stallItemsImage },
-    { name: "Tawa Sabji", hindiName: "तवा सब्जी", category: "stall", description: "Griddle-cooked vegetables", image: stallItemsImage },
-    { name: "Paneer Tikka", hindiName: "पनीर टिक्का", category: "stall", description: "Grilled spiced cottage cheese", image: stallItemsImage },
-    { name: "Kesar Doodh", hindiName: "केसर दूध", category: "stall", description: "Saffron milk", image: stallItemsImage },
-    { name: "Coffee", hindiName: "कॉफी", category: "stall", description: "Brewed coffee", image: stallItemsImage },
-    { name: "Ice Cream", hindiName: "आइसक्रीम", category: "stall", description: "Frozen dessert", image: stallItemsImage },
-    { name: "Aloo Tikki", hindiName: "आलू टिक्की", category: "stall", description: "Potato patties", image: stallItemsImage },
-    { name: "Soup", hindiName: "सूप", category: "stall", description: "Vegetable soup", image: stallItemsImage },
-    { name: "Juicer", hindiName: "जूसर", category: "stall", description: "Fresh fruit juices", image: stallItemsImage },
-    { name: "Idli Sambhar", hindiName: "इडली सांभर", category: "stall", description: "Steamed rice cakes with lentil stew", image: stallItemsImage },
-    { name: "Paneer Chilli", hindiName: "पनीर चिल्ली", category: "stall", description: "Spicy cottage cheese", image: stallItemsImage },
-    { name: "Rumali Roti", hindiName: "रुमाली रोटी", category: "stall", description: "Thin handkerchief bread", image: stallItemsImage },
-    { name: "Butter Naan", hindiName: "बटर नान", category: "stall", description: "Buttered leavened bread", image: stallItemsImage },
-    { name: "Kadhai Doodh", hindiName: "कढ़ाई दूध", category: "stall", description: "Milk cooked in iron wok", image: stallItemsImage },
-    { name: "Chole Bhature", hindiName: "छोले भटूरे", category: "stall", description: "Spiced chickpeas with fried bread", image: stallItemsImage },
-    { name: "Delhi Chaat", hindiName: "दिल्ली चाट", category: "stall", description: "Savory snack with various textures", image: stallItemsImage },
-    { name: "Spring Roll", hindiName: "स्प्रिंग रोल", category: "stall", description: "Crispy vegetable rolls", image: stallItemsImage },
-    { name: "Palak Bada", hindiName: "पालक बड़ा", category: "stall", description: "Spinach fritters", image: stallItemsImage },
-    { name: "Dal Fry", hindiName: "दाल फ्राई", category: "stall", description: "Fried lentils", image: stallItemsImage },
-    { name: "Pineapple Shake", hindiName: "पाइनएप्पल शेक", category: "stall", description: "Pineapple milkshake", image: stallItemsImage },
-    { name: "American Makka", hindiName: "अमेरिकन मक्का", category: "stall", description: "American style corn", image: stallItemsImage },
-    { name: "Chuski Machine", hindiName: "चूस्की मशीन", category: "stall", description: "Ice gola/shaved ice", image: stallItemsImage },
-    { name: "Popcorn Machine", hindiName: "पॉपकॉर्न मशीन", category: "stall", description: "Fresh popcorn", image: stallItemsImage },
-    { name: "Gudiya Bal", hindiName: "गुड़िया बाल", category: "stall", description: "Cotton candy", image: stallItemsImage },
-
-    // Salad Category
-    { name: "Moth Fry", hindiName: "मोठ फ्राई", category: "salad", description: "Fried moth beans", image: saladImage },
-    { name: "Chana Fry", hindiName: "चना फ्राई", category: "salad", description: "Fried chickpeas", image: saladImage },
-    { name: "Ankurit Salad", hindiName: "अंकुरित सलाद", category: "salad", description: "Sprouted bean salad", image: saladImage },
-    { name: "Kheera", hindiName: "खीरा", category: "salad", description: "Cucumber", image: saladImage },
-    { name: "Tamatar", hindiName: "टमाटर", category: "salad", description: "Tomatoes", image: saladImage },
-    { name: "Pyaz", hindiName: "प्याज", category: "salad", description: "Onions", image: saladImage },
-    { name: "Kakdi", hindiName: "ककड़ी", category: "salad", description: "Cucumber variety", image: saladImage },
-    { name: "Mooli", hindiName: "मूली", category: "salad", description: "Radish", image: saladImage },
-    { name: "Gajar", hindiName: "गाजर", category: "salad", description: "Carrots", image: saladImage },
-
-    // Roti Category
-    { name: "Plain Roti", hindiName: "प्लेन रोटी", category: "roti", description: "Simple flatbread", image: rotiImage },
-    { name: "Tawa Roti", hindiName: "तवा रोटी", category: "roti", description: "Griddle-cooked flatbread", image: rotiImage },
-    { name: "Puri", hindiName: "पूरी", category: "roti", description: "Deep-fried puffed bread", image: rotiImage },
-    { name: "Methi Puri", hindiName: "मेथी पूरी", category: "roti", description: "Fenugreek flavored puri", image: rotiImage },
-    { name: "Rumali Roti", hindiName: "रुमाली रोटी", category: "roti", description: "Thin handkerchief bread", image: rotiImage },
-    { name: "Butter Naan", hindiName: "बटर नान", category: "roti", description: "Buttered leavened bread", image: rotiImage },
-
-    // Rice Category
-    { name: "Khichdi", hindiName: "खिचड़ी", category: "rice", description: "Rice and lentil porridge", image: riceImage },
-    { name: "Kabuli", hindiName: "काबुली", category: "rice", description: "Rice with chickpeas", image: riceImage },
-    { name: "Matar Pulao", hindiName: "मटर पुलाव", category: "rice", description: "Peas pilaf", image: riceImage },
-    { name: "Jeera Rice", hindiName: "जीरा राइस", category: "rice", description: "Cumin flavored rice", image: riceImage },
-    { name: "Sada Chawal", hindiName: "सादा चावल", category: "rice", description: "Plain steamed rice", image: riceImage },
-    { name: "Ram Khichdi", hindiName: "राम खिचड़ी", category: "rice", description: "Special khichdi variety", image: riceImage }
-  ];
+  // Note: Removed the static menuItems array as we now fetch it from the database
 
   const filteredItems = menuItems.filter(item => {
     const matchesCategory = activeCategory === "all" || item.category === activeCategory;
-    const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = 
+      item.name?.toLowerCase().includes(searchTerm.toLowerCase()) || 
+      item.hindiName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.description?.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 
@@ -548,10 +399,19 @@ const MenuPage = () => {
           </div>
 
           {/* Menu Items Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
-            {filteredItems.map((item, index) => {
-              // Get specific image path for this menu item if available
-              const specificImagePath = getMenuItemImagePath(item.name, item.hindiName);
+          {isLoading ? (
+            <div className="text-center py-16">
+              <p className="text-muted-foreground text-lg">Loading menu items...</p>
+            </div>
+          ) : error ? (
+            <div className="text-center py-16">
+              <p className="text-red-500 text-lg">Error loading menu: {error}</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+              {filteredItems.map((item, index) => {
+                // Get specific image path for this menu item if available
+                const specificImagePath = getMenuItemImagePath(item.name, item.hindiName);
               
               return (
                 <div 
@@ -619,9 +479,10 @@ const MenuPage = () => {
                 </div>
               );
             })}
-          </div>
+            </div>
+          )}
 
-          {filteredItems.length === 0 && (
+          {!isLoading && !error && filteredItems.length === 0 && (
             <div className="text-center py-16">
               <p className="text-muted-foreground text-lg">No items found matching your search.</p>
             </div>

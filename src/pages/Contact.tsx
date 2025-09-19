@@ -8,6 +8,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Helmet } from "react-helmet";
 import { ReviewCTA } from "@/components/ReviewCTA";
 import { ReactNode } from "react";
+import { supabase } from "@/lib/supabaseClient";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -127,43 +128,33 @@ const ContactPage = () => {
     setIsSubmitting(true);
     
     try {
-      // Send data to the backend API
-      const apiUrl = import.meta.env.DEV 
-        ? 'http://localhost:5000/api/contact' 
-        : 'https://jagdamba-api.onrender.com/api/contact'; // Change this to your production API URL
+      // Save data directly to Supabase
+      const { data, error } = await supabase
+        .from('contact_form')
+        .insert([
+          {
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            event_type: formData.eventType,
+            event_date: formData.eventDate,
+            guest_count: formData.guestCount ? parseInt(formData.guestCount) : null,
+            message: formData.message,
+            created_at: new Date().toISOString()
+          }
+        ]);
       
-      console.log("Submitting form to:", apiUrl);
-      
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-        mode: 'cors',
-        credentials: 'same-origin'
-      });
-      
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error("Server error response:", errorText);
-        
-        try {
-          const result = JSON.parse(errorText);
-          throw new Error(result.message || `Server error: ${response.status}`);
-        } catch (e) {
-          throw new Error(`Server error: ${response.status}. ${errorText || ''}`);
-        }
+      if (error) {
+        console.error("Supabase error:", error);
+        throw new Error(error.message || "Error submitting form to database");
       }
       
-      const result = await response.json();
-      
-      console.log("Form submitted:", result);
+      console.log("Form submitted to Supabase:", data);
       
       // Show success message
       toast({
         title: "Booking Request Submitted!",
-        description: "Thank you for your inquiry. We've sent you a confirmation email and will contact you within 24 hours.",
+        description: "Thank you for your inquiry. We will contact you within 24 hours.",
         variant: "default"
       });
       
@@ -186,18 +177,13 @@ const ContactPage = () => {
       }, 5000);
       
     } catch (error: any) {
-      // Handle network errors (like CORS issues)
+      // Handle submission errors
       const errorMessage = error.message || "There was an error submitting your request.";
-      const isCorsError = errorMessage.includes("NetworkError") || 
-                          errorMessage.includes("Failed to fetch") || 
-                          error.name === "TypeError";
       
       // Show toast with error message
       toast({
         title: "Submission Failed",
-        description: isCorsError 
-          ? "Unable to connect to our server. This might be due to network issues or server maintenance. Please contact us directly via phone or email."
-          : errorMessage,
+        description: errorMessage,
         variant: "destructive"
       });
       
@@ -344,6 +330,200 @@ const ContactPage = () => {
                   WhatsApp Chat
                 </a>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Form Section */}
+        <section className="py-12 md:py-16 lg:py-20 bg-gradient-to-t from-muted/20 to-background">
+          <div className="container mx-auto px-4 sm:px-6">
+            <div className="text-center mb-8 sm:mb-10 md:mb-12">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 md:mb-6">Book <span className="text-gradient-gold">Your Event</span></h2>
+              <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
+                Fill out the form below to request a quote for your upcoming event. Our team will reach out to you within 24 hours.
+              </p>
+            </div>
+            
+            <div className="glass-card p-4 sm:p-6 md:p-8 max-w-3xl mx-auto">
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                  {/* Name Field */}
+                  <div className="form-group">
+                    <label htmlFor="name" className="block text-sm font-medium mb-1 flex items-center">
+                      <User className="w-4 h-4 mr-1" />
+                      Your Name <span className="text-red-500 ml-1">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      placeholder="Full Name"
+                      className={`w-full px-3 py-2 rounded-md border ${errors.name ? 'border-red-500' : 'border-border'} bg-card text-sm focus:outline-none focus:ring-2 focus:ring-primary/50`}
+                    />
+                    {errors.name && (
+                      <p className="text-red-500 text-xs mt-1">{errors.name}</p>
+                    )}
+                  </div>
+                  
+                  {/* Email Field */}
+                  <div className="form-group">
+                    <label htmlFor="email" className="block text-sm font-medium mb-1 flex items-center">
+                      <Mail className="w-4 h-4 mr-1" />
+                      Email Address <span className="text-red-500 ml-1">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      placeholder="your@email.com"
+                      className={`w-full px-3 py-2 rounded-md border ${errors.email ? 'border-red-500' : 'border-border'} bg-card text-sm focus:outline-none focus:ring-2 focus:ring-primary/50`}
+                    />
+                    {errors.email && (
+                      <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+                    )}
+                  </div>
+                  
+                  {/* Phone Field */}
+                  <div className="form-group">
+                    <label htmlFor="phone" className="block text-sm font-medium mb-1 flex items-center">
+                      <Phone className="w-4 h-4 mr-1" />
+                      Phone Number <span className="text-red-500 ml-1">*</span>
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      placeholder="e.g. +91 98765 43210"
+                      className={`w-full px-3 py-2 rounded-md border ${errors.phone ? 'border-red-500' : 'border-border'} bg-card text-sm focus:outline-none focus:ring-2 focus:ring-primary/50`}
+                    />
+                    {errors.phone && (
+                      <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
+                    )}
+                  </div>
+                  
+                  {/* Event Type Field */}
+                  <div className="form-group">
+                    <label htmlFor="eventType" className="block text-sm font-medium mb-1 flex items-center">
+                      <MessageCircle className="w-4 h-4 mr-1" />
+                      Event Type <span className="text-red-500 ml-1">*</span>
+                    </label>
+                    <select
+                      id="eventType"
+                      name="eventType"
+                      value={formData.eventType}
+                      onChange={handleInputChange}
+                      className={`w-full px-3 py-2 rounded-md border ${errors.eventType ? 'border-red-500' : 'border-border'} bg-card text-sm focus:outline-none focus:ring-2 focus:ring-primary/50`}
+                    >
+                      <option value="">Select Event Type</option>
+                      {eventTypes.map((type, index) => (
+                        <option key={index} value={type}>
+                          {type}
+                        </option>
+                      ))}
+                    </select>
+                    {errors.eventType && (
+                      <p className="text-red-500 text-xs mt-1">{errors.eventType}</p>
+                    )}
+                  </div>
+                  
+                  {/* Event Date Field */}
+                  <div className="form-group">
+                    <label htmlFor="eventDate" className="block text-sm font-medium mb-1 flex items-center">
+                      <Calendar className="w-4 h-4 mr-1" />
+                      Event Date
+                    </label>
+                    <input
+                      type="date"
+                      id="eventDate"
+                      name="eventDate"
+                      value={formData.eventDate}
+                      onChange={handleInputChange}
+                      className="w-full px-3 py-2 rounded-md border border-border bg-card text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    />
+                  </div>
+                  
+                  {/* Guest Count Field */}
+                  <div className="form-group">
+                    <label htmlFor="guestCount" className="block text-sm font-medium mb-1 flex items-center">
+                      <User className="w-4 h-4 mr-1" />
+                      Number of Guests
+                    </label>
+                    <input
+                      type="number"
+                      id="guestCount"
+                      name="guestCount"
+                      value={formData.guestCount}
+                      onChange={handleInputChange}
+                      placeholder="Approximate number of guests"
+                      className="w-full px-3 py-2 rounded-md border border-border bg-card text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    />
+                  </div>
+                </div>
+                
+                {/* Message Field */}
+                <div className="form-group">
+                  <label htmlFor="message" className="block text-sm font-medium mb-1 flex items-center">
+                    <MessageCircle className="w-4 h-4 mr-1" />
+                    Additional Details
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    placeholder="Please share any specific requirements or questions you have..."
+                    rows={4}
+                    className="w-full px-3 py-2 rounded-md border border-border bg-card text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  />
+                </div>
+                
+                {errors.serverError && (
+                  <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md flex items-start">
+                    <AlertCircle className="w-5 h-5 mr-2 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-medium text-sm">We're experiencing technical difficulties</p>
+                      <p className="text-xs mt-1">{errors.serverError}</p>
+                    </div>
+                  </div>
+                )}
+                
+                {/* Submit Button */}
+                <div className="text-center pt-2">
+                  <Button 
+                    type="submit" 
+                    disabled={isSubmitting}
+                    className={`btn-hero-primary golden-glow w-full sm:w-auto px-8 py-2 ${isSubmitting ? 'opacity-70' : ''}`}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        Submitting...
+                      </>
+                    ) : isSuccess ? (
+                      <>
+                        <CheckCircle className="w-4 h-4 mr-2" />
+                        Submitted Successfully
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4 mr-2" />
+                        Submit Booking Request
+                      </>
+                    )}
+                  </Button>
+                  
+                  <p className="text-xs text-muted-foreground mt-4">
+                    By submitting this form, you agree to our terms and conditions.
+                    We'll use the information you provide to respond to your inquiry.
+                  </p>
+                </div>
+              </form>
             </div>
           </div>
         </section>

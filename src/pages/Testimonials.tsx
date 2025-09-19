@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Star, Quote, ChevronLeft, ChevronRight, Send } from "lucide-react";
+import { Star, Quote, ChevronLeft, ChevronRight, Send, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -7,15 +7,18 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
+import { supabase } from "@/lib/supabaseClient";
 
 const TestimonialsPage = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [reviewType, setReviewType] = useState<"review" | "story">("review");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     event: "",
+    eventDate: "",
     rating: 5,
     message: ""
   });
@@ -35,28 +38,65 @@ const TestimonialsPage = () => {
     setIsDialogOpen(true);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // You would typically send this data to your backend
-    console.log("Form submitted:", formData);
-    
-    // Show success message
-    toast({
-      title: reviewType === "review" ? "Review Submitted!" : "Your Story Submitted!",
-      description: "Thank you for sharing your experience with us. Your feedback is valuable!",
-      variant: "default",
-    });
-    
-    // Reset form and close dialog
-    setFormData({
-      name: "",
-      email: "",
-      event: "",
-      rating: 5,
-      message: ""
-    });
-    setIsDialogOpen(false);
+  const handleSubmit = async (e: React.FormEvent) => {
+
+  alert('Submitting review! If you see this, the form submit handler is working.');
+  console.log('handleSubmit called!');
+  e.preventDefault();
+  setIsSubmitting(true);
+
+    try {
+      // Save the review to Supabase
+      const payload = {
+        name: formData.name,
+        email: formData.email,
+        event_type: formData.event,
+        event_date: formData.eventDate || null,
+        rating: formData.rating,
+        review: formData.message,
+        review_type: reviewType,
+        created_at: new Date().toISOString()
+      };
+      console.log("Submitting review payload to Supabase:", payload);
+      const { data, error, status, statusText } = await supabase
+        .from('reviews')
+        .insert([payload]);
+
+      if (error) {
+        console.error("Supabase insert error:", error, "Status:", status, statusText);
+        throw new Error(error.message);
+      }
+
+      console.log("Review submitted to Supabase. Data:", data, "Status:", status, statusText);
+
+      // Show success message
+      toast({
+        title: reviewType === "review" ? "Review Submitted!" : "Your Story Submitted!",
+        description: "Thank you for sharing your experience with us. Your feedback is valuable!",
+        variant: "default",
+      });
+
+      // Reset form and close dialog
+      setFormData({
+        name: "",
+        email: "",
+        event: "",
+        eventDate: "",
+        rating: 5,
+        message: ""
+      });
+      setIsDialogOpen(false);
+    } catch (error: any) {
+      // Show error message
+      toast({
+        title: "Submission Failed",
+        description: error.message || "An error occurred while submitting your review. Please try again.",
+        variant: "destructive",
+      });
+      console.error("Error submitting review:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const testimonials = [
@@ -358,6 +398,20 @@ const TestimonialsPage = () => {
                 className="bg-background/50 border-primary/20 text-sm"
               />
             </div>
+            
+            <div className="space-y-1 sm:space-y-2">
+              <label htmlFor="eventDate" className="text-xs sm:text-sm font-medium">
+                Event Date
+              </label>
+              <Input
+                id="eventDate"
+                name="eventDate"
+                type="date"
+                value={formData.eventDate}
+                onChange={handleInputChange}
+                className="bg-background/50 border-primary/20 text-sm"
+              />
+            </div>
 
             {reviewType === "review" && (
               <div className="space-y-1 sm:space-y-2">
@@ -403,9 +457,22 @@ const TestimonialsPage = () => {
             </div>
 
             <div className="flex justify-end pt-2 sm:pt-4">
-              <Button type="submit" className="btn-hero-primary golden-glow text-xs sm:text-sm">
-                <Send className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-                Submit {reviewType === "review" ? "Review" : "Story"}
+              <Button 
+                type="submit" 
+                className="btn-hero-primary golden-glow text-xs sm:text-sm"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 animate-spin" />
+                    Submitting...
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                    Submit {reviewType === "review" ? "Review" : "Story"}
+                  </>
+                )}
               </Button>
             </div>
           </form>

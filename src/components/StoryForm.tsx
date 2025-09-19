@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { supabase } from "@/lib/supabaseClient";
 import { 
   Dialog, 
   DialogContent, 
@@ -34,25 +35,62 @@ export const StoryForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
+
+    // Collect form data
+    const form = e.target as HTMLFormElement;
+    const name = (form.elements.namedItem("name") as HTMLInputElement)?.value;
+    const email = (form.elements.namedItem("email") as HTMLInputElement)?.value;
+    const eventDate = (form.elements.namedItem("eventDate") as HTMLInputElement)?.value;
+    const review = (form.elements.namedItem("review") as HTMLTextAreaElement)?.value;
+    // rating is from state
+    let photoUrl = null;
+
+    // If photo is selected, upload to Supabase storage
+    if (fileInputRef.current && fileInputRef.current.files && fileInputRef.current.files.length > 0) {
+      const file = fileInputRef.current.files[0];
+      const filePath = `reviews/${Date.now()}_${file.name}`;
+      const { data: uploadData, error: uploadError } = await supabase.storage.from('reviews').upload(filePath, file);
+      if (uploadError) {
+        alert("Photo upload failed: " + uploadError.message);
+        setIsSubmitting(false);
+        return;
+      }
+      const { data: publicUrlData } = supabase.storage.from('reviews').getPublicUrl(filePath);
+      photoUrl = publicUrlData?.publicUrl || null;
+    }
+
+    // Insert into Supabase 'reviews' table
+    const { error } = await supabase.from('reviews').insert([
+      {
+        name,
+        email,
+        event_date: eventDate,
+        review,
+        rating,
+        photo_url: photoUrl,
+        created_at: new Date().toISOString(),
+      },
+    ]);
+
+    if (error) {
+      alert("Submission failed: " + error.message);
       setIsSubmitting(false);
-      setIsSubmitted(true);
-      
-      // Reset after showing success message
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setIsOpen(false);
-        setRating(0);
-        setFileName("");
-        if (fileInputRef.current) {
-          fileInputRef.current.value = "";
-        }
-      }, 2000);
-    }, 1500);
+      return;
+    }
+
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+    // Reset after showing success message
+    setTimeout(() => {
+      setIsSubmitted(false);
+      setIsOpen(false);
+      setRating(0);
+      setFileName("");
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
+    }, 2000);
   };
   
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -128,13 +166,20 @@ export const StoryForm = () => {
             {/* Event Date */}
             <div className="space-y-2">
               <Label htmlFor="eventDate">Event Date</Label>
-              <div className="relative">
-                <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+              <div className="relative" onClick={e => {
+                const input = document.getElementById('eventDate');
+                if (input) (input as HTMLInputElement).showPicker?.();
+              }}>
+                <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-5 h-5 pointer-events-none" />
                 <Input 
                   id="eventDate" 
+                  name="eventDate"
                   type="date" 
-                  className="pl-10"
+                  className="pl-10 cursor-pointer"
                   required
+                  max={new Date().toISOString().split('T')[0]}
+                  style={{ colorScheme: 'light' }}
+                  onKeyDown={e => e.preventDefault()} // Prevent manual typing
                 />
               </div>
             </div>
@@ -172,7 +217,7 @@ export const StoryForm = () => {
             
             {/* Photo Upload */}
             <div className="space-y-2">
-              <Label htmlFor="photo">Add a Photo (Optional)</Label>
+              <Label htmlFor="photo">Add a Photo (Optional, profile photo)</Label>
               <input
                 ref={fileInputRef}
                 id="photo"
@@ -199,6 +244,7 @@ export const StoryForm = () => {
               </div>
             </div>
             
+            {/* Dialog footer with submit button */}
             <DialogFooter className="pt-4">
               <Button 
                 type="submit" 
