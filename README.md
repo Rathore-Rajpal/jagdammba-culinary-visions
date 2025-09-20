@@ -59,6 +59,54 @@ This project is built with:
 - React
 - shadcn-ui
 - Tailwind CSS
+- Supabase (for database and storage)
+
+## Utility Functions
+
+### Supabase Storage Unicode Filename Support
+
+This project includes utility functions for handling Hindi/Unicode filenames in Supabase Storage for both uploading and displaying files:
+
+```typescript
+// Import the utilities for display
+import { getSafeSupabaseUrl, getMenuItemImageUrl } from './src/lib/supabaseStorageUtils';
+
+// For any image with Hindi filename
+const imageUrl = getSafeSupabaseUrl('bucket-name', 'लड्डू.png');
+
+// Specifically for menu items (shorthand)
+const menuImage = getMenuItemImageUrl('समोसा.jpg');
+
+// For uploading files with Hindi filenames
+import { uploadFileWithUnicodeName, uploadMenuItemImage } from './src/lib/supabaseUploadUtils';
+
+// Upload a file while preserving Hindi filename
+const file = event.target.files[0]; // e.g. "जलेबी.png"
+const { url, path, error } = await uploadFileWithUnicodeName('menu-items', file);
+
+// Quick upload for menu items
+const { url } = await uploadMenuItemImage(file);
+```
+
+#### React Components
+
+We also provide React components for easy Hindi filename handling:
+
+```tsx
+// Display component
+import SafeStorageImage from './src/components/SafeStorageImage';
+<SafeStorageImage bucketName="menu-items" fileName="लड्डू.png" />
+
+// Upload component
+import HindiImageUploader from './src/components/HindiImageUploader';
+<HindiImageUploader bucketName="menu-items" onUploadSuccess={(url) => console.log(url)} />
+
+// Complete menu item form with image upload
+import MenuItemUploader from './src/components/MenuItemUploader';
+<MenuItemUploader />
+```
+
+See the full documentation in `src/lib/README-storage-utils.md` and demo pages in `src/pages/StorageDemo.tsx` and `src/pages/UploadDemo.tsx`.
 
 ## How can I deploy this project?
 

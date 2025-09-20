@@ -410,38 +410,42 @@ const MenuPage = () => {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
               {filteredItems.map((item, index) => {
-                // Get specific image path for this menu item if available
+                // Prefer Supabase image_url if present, else fallback
                 const specificImagePath = getMenuItemImagePath(item.name, item.hindiName);
-              
-              return (
-                <div 
-                  key={index}
-                  className="glass-card hover-tilt group animate-scale-in"
-                  style={{ animationDelay: `${index * 0.05}s` }}
-                >
-                  <div className="relative overflow-hidden rounded-t-lg">
-                    <div className="w-full h-36 sm:h-40 md:h-48 bg-white flex items-center justify-center p-2">
-                      <img 
-                        src={specificImagePath || item.image} 
-                        alt={item.name}
-                        className={cn(
-                          "group-hover:scale-110 transition-transform duration-500",
-                          specificImagePath ? "max-w-full max-h-full object-contain" : "w-full h-full object-cover"
-                        )}
-                        loading="lazy"
-                        onError={(e) => {
-                          // Fallback to category image if specific image fails to load
-                          const target = e.target as HTMLImageElement;
-                          target.onerror = null;
-                          target.src = item.image;
-                          target.className = "w-full h-full object-cover group-hover:scale-110 transition-transform duration-500";
-                        }}
-                      />
+                const supabaseImageUrl = item.image_url || item.imageUrl;
+                const imageSrc = supabaseImageUrl && supabaseImageUrl.startsWith('http')
+                  ? supabaseImageUrl
+                  : (specificImagePath || item.image);
+
+                return (
+                  <div 
+                    key={index}
+                    className="glass-card hover-tilt group animate-scale-in"
+                    style={{ animationDelay: `${index * 0.05}s` }}
+                  >
+                    <div className="relative overflow-hidden rounded-t-lg">
+                      <div className="w-full h-36 sm:h-40 md:h-48 bg-white flex items-center justify-center p-2">
+                        <img 
+                          src={imageSrc} 
+                          alt={item.name}
+                          className={cn(
+                            "group-hover:scale-110 transition-transform duration-500",
+                            imageSrc === supabaseImageUrl ? "max-w-full max-h-full object-contain" : "w-full h-full object-cover"
+                          )}
+                          loading="lazy"
+                          onError={(e) => {
+                            // Fallback to category/local image if Supabase image fails to load
+                            const target = e.target as HTMLImageElement;
+                            target.onerror = null;
+                            target.src = specificImagePath || item.image;
+                            target.className = "w-full h-full object-cover group-hover:scale-110 transition-transform duration-500";
+                          }}
+                        />
+                      </div>
+                      {!(imageSrc === supabaseImageUrl) && (
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                      )}
                     </div>
-                    {!specificImagePath && (
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                    )}
-                  </div>
                   
                   <div className="p-4 md:p-6">
                     <h3 className="text-base md:text-lg font-semibold text-gradient-gold mb-1 md:mb-2">
